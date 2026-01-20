@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset='UTF-8'>
+<title>Admin Login</title>
+<script type='module' src='assets/login.js'></script>
 </head>
-<body>
-
-<div style="max-width:400px;margin:80px auto;text-align:center">
-  <img src="images/5.png" style="height:60px"><br><br>
-  <h2>Admin Login</h2>
-  <input type="email" placeholder="Email" style="width:100%;padding:10px"><br><br>
-  <input type="password" placeholder="Password" style="width:100%;padding:10px"><br><br>
-  <button style="width:100%;padding:10px">Login</button>
-  <p style="color:red"></p>
-</div>
-
+<body style='font-family:Arial;text-align:center;margin-top:80px'>
+<img src='images/5.png' style='height:60px'><br><br>
+<h2>Admin Login</h2>
+<input id='email' type='email' placeholder='Email'><br><br>
+<input id='password' type='password' placeholder='Password'><br><br>
+<button onclick='login()'>Login</button>
+<p id='error' style='color:red'></p>
 </body>
 </html>
