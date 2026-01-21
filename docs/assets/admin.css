@@ -1,12 +1,30 @@
-body { font-family:Arial; background:#f2f2f2; }
+body {
+  font-family: Arial;
+  background: #f2f2f2;
+  margin: 0;
+}
+
 header {
-  background:black; color:white;
-  padding:20px; display:flex;
-  justify-content:space-between;
+  background: black;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
 }
-main { padding:40px; }
+
+main {
+  padding: 40px;
+}
+
 .car {
-  background:white; padding:20px;
-  margin-bottom:20px; border-radius:8px;
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
-input, textarea { width:100%; margin-bottom:10px; }
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
