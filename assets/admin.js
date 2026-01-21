@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, getDocs, collection, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
   apiKey: "AIzaSyDnp4fC2_cEw04ydtWOwYgVzRUsqScufFs",
@@ -11,30 +11,31 @@ const app = initializeApp({
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-onAuthStateChanged(auth,user=>{
-  if(!user) location.href="login.html";
-  else document.body.style.display="block";
+onAuthStateChanged(auth, user => {
+  if (!user) location.href = "login.html";
+  else document.body.style.display = "block";
 });
 
-logout.onclick = ()=> signOut(auth);
+logout.onclick = () => signOut(auth);
 
-const snap = await getDocs(collection(db,"cars"));
-snap.forEach(d=>{
-  const c=d.data();
-  cars.innerHTML+=`
-  <div class="car">
-    <input value="${c.name}" id="n${d.id}">
-    <input value="${c.price}" id="p${d.id}">
-    <textarea id="d${d.id}">${c.description}</textarea>
-    <button onclick="save('${d.id}')">Save</button>
-  </div>`;
+const snap = await getDocs(collection(db, "cars"));
+snap.forEach(d => {
+  const c = d.data();
+  cars.innerHTML += `
+    <div class="car">
+      <input id="n${d.id}" value="${c.name}">
+      <input id="p${d.id}" value="${c.price}">
+      <textarea id="d${d.id}">${c.description}</textarea>
+      <button onclick="save('${d.id}')">Save</button>
+    </div>
+  `;
 });
 
-window.save = async id=>{
+window.save = async id => {
   await updateDoc(doc(db,"cars",id),{
-    name:n${id}.value,
-    price:p${id}.value,
-    description:d${id}.value
+    name:document.getElementById("n"+id).value,
+    price:document.getElementById("p"+id).value,
+    description:document.getElementById("d"+id).value
   });
   alert("Saved");
 };

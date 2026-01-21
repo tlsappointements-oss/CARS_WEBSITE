@@ -8,15 +8,11 @@ const app = initializeApp({
 
 const auth = getAuth(app);
 
-document.getElementById("login").onclick = async ()=>{
-  try{
-    await signInWithEmailAndPassword(
-      auth,
-      email.value,
-      password.value
-    );
-    location.href="admin.html";
-  }catch{
-    error.inner marking = "Wrong email or password";
+login.onclick = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    location.href = "admin.html";
+  } catch {
+    error.textContent = "Wrong email or password";
   }
 };

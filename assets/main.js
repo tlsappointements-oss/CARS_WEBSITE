@@ -1,19 +1,20 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const app = initializeApp({
+const firebaseConfig = {
   apiKey: "AIzaSyDnp4fC2_cEw04ydtWOwYgVzRUsqScufFs",
   authDomain: "cars-website-558c0.firebaseapp.com",
   projectId: "cars-website-558c0"
-});
+};
 
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const list = document.getElementById("carsList");
 
-const snap = await getDocs(collection(db,"cars"));
-snap.forEach(d=>{
-  const c=d.data();
+const snap = await getDocs(collection(db, "cars"));
+snap.forEach(doc => {
+  const c = doc.data();
   list.innerHTML += `
     <div class="car">
       <img src="${c.image}">

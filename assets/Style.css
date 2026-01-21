@@ -1,24 +1,65 @@
-body { margin:0; font-family:Arial; background:#f5f5f5; }
+body {
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f2f2f2;
+}
+
 header {
-  background:black; color:white;
-  display:flex; justify-content:space-between;
-  padding:15px 40px; align-items:center;
+  background:black;
+  color:white;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
 }
-.logo { height:40px; }
-nav a { color:white; margin-left:20px; text-decoration:none; }
+
+.logo {
+  height:40px;
+}
+
+nav a {
+  color:white;
+  margin-left:20px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
 .hero {
+  height:70vh;
   background:url('../images/car1.png') center/cover;
-  height:70vh; color:white;
-  display:flex; flex-direction:column;
-  justify-content:center; align-items:center;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
-.cars, .services { padding:60px; }
+
+.hero h1 { font-size:48px; }
+.hero p { font-size:20px; }
+
+.cars, .services {
+  padding:60px;
+  background:white;
+}
+
 .car {
-  background:white; padding:20px; margin-bottom:20px;
-  display:flex; gap:20px;
+  background:#fafafa;
+  padding:20px;
+  margin-bottom:20px;
+  display:flex;
+  gap:20px;
+  border-radius:8px;
 }
-.car img { width:200px; }
+
+.car img {
+  width:220px;
+  border-radius:8px;
+}
+
 footer {
-  background:black; color:white;
-  text-align:center; padding:20px;
+  background:black;
+  color:white;
+  text-align:center;
+  padding:20px;
 }
