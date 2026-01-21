@@ -260,3 +260,105 @@ body {
   color: #999;
   text-align: center;
 }
+/* ===============================
+   MERCEDES PROFESSIONAL LOGIN
+================================ */
+
+.login-page {
+  margin: 0;
+  height: 100vh;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f4f5f6;
+}
+
+/* Centering */
+.login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Login Box */
+.login-box {
+  width: 420px;
+  background: white;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+/* Brand */
+.login-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.login-brand img {
+  height: 34px;
+  width: auto;
+}
+
+.login-brand span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: 0.4px;
+}
+
+/* Text */
+.login-box h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #111;
+}
+
+.login-box p {
+  margin: 6px 0 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Inputs */
+.login-box input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.login-box input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* Button */
+.login-box button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #000;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #222;
+}
+
+/* Footer */
+.login-box small {
+  display: block;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #999;
+}
