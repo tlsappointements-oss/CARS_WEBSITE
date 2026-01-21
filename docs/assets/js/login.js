@@ -1,18 +1,38 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth } from "./firebase.js";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const app = initializeApp({
-  apiKey: "AIzaSyDnp4fC2_cEw04ydtWOwYgVzRUsqScufFs",
-  authDomain: "cars-website-558c0.firebaseapp.com"
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const errorBox = document.getElementById("error");
+
+/* 🔒 If already logged in, redirect */
+onAuthStateChanged(auth, user => {
+  if (user) {
+    window.location.replace("admin.html");
+  }
 });
 
-const auth = getAuth(app);
+/* 🔑 Login */
+loginBtn.addEventListener("click", async () => {
+  errorBox.textContent = "";
 
-login.onclick = async ()=>{
-  try {
-    await signInWithEmailAndPassword(auth, email.value, password.value);
-    location.href="admin.html";
-  } catch {
-    error.textContent="Wrong email or password";
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  if (!email || !password) {
+    errorBox.textContent = "Please fill all fields";
+    return;
   }
-};
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.replace("admin.html");
+  } catch (err) {
+    errorBox.textContent = "Invalid email or password";
+    console.error(err.code);
+  }
+});

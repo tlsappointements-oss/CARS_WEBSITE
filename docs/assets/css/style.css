@@ -362,3 +362,193 @@ body {
   font-size: 12px;
   color: #999;
 }
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #0b0b0b;
+  color: #eaeaea;
+}
+
+/* =========================
+   ADMIN LAYOUT
+========================= */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.admin-layout aside {
+  width: 260px;
+  background: linear-gradient(180deg, #000 0%, #111 100%);
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-shadow: 8px 0 30px rgba(0,0,0,.6);
+}
+
+.admin-layout aside h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: #fff;
+}
+
+.admin-layout aside button {
+  margin-top: auto;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #111;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .25s ease;
+}
+
+.admin-layout aside button:hover {
+  background: #222;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+.admin-layout main {
+  flex: 1;
+  padding: 60px;
+  background: radial-gradient(circle at top, #151515, #0b0b0b);
+}
+
+.admin-layout main h1 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+/* =========================
+   ADMIN SECTIONS
+========================= */
+.admin-section {
+  background: linear-gradient(180deg, #111, #0e0e0e);
+  border-radius: 18px;
+  padding: 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+
+.admin-section h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* =========================
+   FORMS
+========================= */
+.form input,
+.form textarea,
+.form select {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  background: #0b0b0b;
+  border-radius: 10px;
+  border: 1px solid #222;
+  color: #fff;
+  font-size: 14px;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  outline: none;
+  border-color: #444;
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+.form label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.form button {
+  padding: 14px 26px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #fff, #ccc);
+  color: #000;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255,255,255,.15);
+}
+
+/* =========================
+   DELETE / DANGER BUTTON
+========================= */
+.danger {
+  background: linear-gradient(135deg, #b00000, #700000);
+  color: white;
+}
+
+.danger:hover {
+  box-shadow: 0 12px 30px rgba(176,0,0,.4);
+}
+
+/* =========================
+   DROPDOWNS
+========================= */
+select {
+  cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-layout aside {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .admin-layout main {
+    padding: 30px;
+  }
+}
