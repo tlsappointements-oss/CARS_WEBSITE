@@ -1,39 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Admin Login</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
-<body class="centered">
+<body class="center">
 
 <div class="login-box">
   <h2>Admin Login</h2>
-  <input id="email" type="email" placeholder="Email">
+  <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <p id="error"></p>
+  <button onclick="login()">Login</button>
 </div>
 
-<script type="module">
-  import { auth } from "./assets/js/firebase.js";
-  import { signInWithEmailAndPassword }
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  document.getElementById("loginBtn").onclick = async () => {
-    try {
-      await signInWithEmailAndPassword(
-        auth,
-        email.value,
-        password.value
-      );
-      window.location.replace("admin.html");
-    } catch {
-      error.textContent = "Invalid credentials";
-    }
-  };
-</script>
-
+<script src="./assets/js/auth.js"></script>
 </body>
 </html>

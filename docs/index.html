@@ -1,22 +1,22 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Mercedes-Benz | Models</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
 <header class="header">
   <div class="brand">
-    <img src="assets/images/logo.png">
+    <img src="./assets/images/logo.png" alt="Mercedes">
     <span>Mercedes-Benz</span>
   </div>
 
-  <div class="nav-right">
-    <button class="dots" onclick="toggleMenu()">?</button>
-    <div class="dropdown" id="dropdown">
+  <div class="menu">
+    <button class="menu-btn" onclick="toggleMenu()">?</button>
+    <div id="menuDropdown" class="menu-dropdown">
       <a href="about.html">About</a>
       <a href="departments.html">Company Departments</a>
       <a href="login.html">Admin</a>
@@ -29,25 +29,29 @@
   <p>Luxury • Performance • Innovation</p>
 </section>
 
-<section class="cars-grid">
+<section class="container cars-grid">
   <div class="car" onclick="openCar(0)">
-    <img src="assets/images/car1.jpg">
+    <img src="./assets/images/car1.jpg">
     <h3>C-Class</h3>
   </div>
+
   <div class="car" onclick="openCar(1)">
-    <img src="assets/images/car2.jpg">
+    <img src="./assets/images/car2.jpg">
     <h3>E-Class</h3>
   </div>
+
   <div class="car" onclick="openCar(2)">
-    <img src="assets/images/car3.jpg">
+    <img src="./assets/images/car3.jpg">
     <h3>S-Class</h3>
   </div>
 </section>
 
-<footer class="footer">© 2026 Mercedes-Benz</footer>
+<footer class="footer">
+  © 2026 Mercedes-Benz
+</footer>
 
 <!-- MODAL -->
-<div class="modal" id="carModal">
+<div id="carModal" class="modal">
   <span class="close" onclick="closeCar()">×</span>
   <img id="modalImg">
   <h2 id="modalTitle"></h2>
@@ -57,6 +61,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js"></script>
+<script src="./assets/js/main.js"></script>
 </body>
 </html>

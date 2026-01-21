@@ -1,155 +1,151 @@
-* { box-sizing:border-box; margin:0; padding:0 }
-
-body {
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background:#0c0c0c;
-  color:#fff;
+* {
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+/* HEADER */
 .header {
-  height:72px;
-  padding:0 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background: #000;
 }
 
 .brand {
-  display:flex;
-  align-items:center;
-  gap:14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.brand img { height:38px }
-.brand span { font-size:20px; letter-spacing:1px }
-
-.nav-right { position:relative }
-
-.dots {
-  background:none;
-  border:none;
-  font-size:28px;
-  color:white;
-  cursor:pointer;
+.brand img {
+  height: 34px;
 }
 
-.dropdown {
-  display:none;
-  position:absolute;
-  right:0;
-  top:40px;
-  background:#111;
-  border:1px solid #333;
+.menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
 }
 
-.dropdown a {
-  display:block;
-  padding:14px 20px;
-  color:white;
-  text-decoration:none;
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  right: 40px;
+  top: 70px;
+  background: #111;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
-.dropdown a:hover { background:#222 }
+.menu-dropdown a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+}
 
+.menu-dropdown a:hover {
+  background: #222;
+}
+
+/* HERO */
 .hero {
-  padding:90px 20px;
-  text-align:center;
+  text-align: center;
+  padding: 90px 20px;
 }
 
-.hero h1 { font-size:48px }
-.hero p { color:#aaa }
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: #aaa;
+}
+
+/* LAYOUT */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px;
+}
 
 .cars-grid {
-  padding:60px;
-  display:grid;
-  gap:30px;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 
+/* CAR CARD */
 .car {
-  background:#111;
-  border-radius:14px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:transform .3s;
+  background: #111;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s;
 }
 
-.car:hover { transform:translateY(-6px) }
+.car:hover {
+  transform: translateY(-6px);
+}
 
 .car img {
-  width:100%;
-  height:220px;
-  object-fit:cover;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
 }
 
-.car h3 { padding:15px; text-align:center }
+.car h3 {
+  padding: 18px;
+}
 
+/* FOOTER */
 .footer {
-  text-align:center;
-  padding:30px;
-  color:#777;
+  text-align: center;
+  padding: 30px;
+  color: #777;
 }
 
 /* MODAL */
 .modal {
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.9);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .modal img {
-  max-width:80%;
-  max-height:60vh;
+  max-width: 80%;
+  border-radius: 12px;
+}
+
+.modal h2 {
+  margin: 20px 0;
 }
 
 .close {
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:36px;
-  cursor:pointer;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 32px;
+  cursor: pointer;
 }
 
-/* LOGIN */
-.centered {
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.modal-nav button {
+  font-size: 30px;
+  margin: 0 20px;
 }
-
-.login-box {
-  background:#111;
-  padding:40px;
-  width:320px;
-  text-align:center;
-  border-radius:12px;
-}
-
-.login-box input, .login-box button {
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  border:none;
-}
-
-.login-box button {
-  background:white;
-  color:black;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* ADMIN */
-.admin-layout { display:flex; height:100vh }
-aside {
-  width:240px;
-  background:black;
-  padding:30px;
-}
-main { flex:1; padding:40px }
