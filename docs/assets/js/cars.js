@@ -1,50 +1,40 @@
 import { db } from "./firebase.js";
 import {
-  collection,
-  onSnapshot,
-  query,
-  orderBy,
-  doc
+  collection, onSnapshot, doc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* Cars */
-const carsContainer = document.getElementById("cars");
+const carsEl = document.getElementById("cars");
+const aboutText = document.getElementById("aboutText");
+const deptSelect = document.getElementById("departmentsSelect");
 
-const q = query(collection(db, "cars"), orderBy("updatedAt", "desc"));
-
-onSnapshot(q, snapshot => {
-  carsContainer.innerHTML = "";
-  snapshot.forEach(d => {
-    const car = d.data();
-    carsContainer.innerHTML += `
+onSnapshot(collection(db,"cars"), snap => {
+  carsEl.innerHTML = "";
+  snap.forEach(d => {
+    const c = d.data();
+    carsEl.innerHTML += `
       <div class="car-card">
-        ${car.isNew ? `<span class="badge">NEW</span>` : ""}
-        <img src="assets/images/${car.image}">
-        <h3>${car.name}</h3>
-        <p>${car.description}</p>
-        <strong>${car.price} €</strong>
+        ${c.isNew ? `<div class="badge">NEW</div>` : ""}
+        <img src="assets/images/${c.image}">
+        <div class="car-body">
+          <h3>${c.name}</h3>
+          <p>${c.description}</p>
+          <div class="car-price">${c.price} €</div>
+        </div>
       </div>
     `;
   });
 });
 
-/* About */
-onSnapshot(doc(db, "settings", "about"), snap => {
-  if (snap.exists()) {
-    document.getElementById("aboutText").textContent = snap.data().text;
-  }
+onSnapshot(doc(db,"settings","about"), snap => {
+  if (snap.exists()) aboutText.textContent = snap.data().text;
 });
 
-/* Departments */
-onSnapshot(doc(db, "settings", "departments"), snap => {
+onSnapshot(doc(db,"settings","departments"), snap => {
   if (!snap.exists()) return;
-
-  const select = document.getElementById("departments");
-  select.innerHTML = "";
-
-  snap.data().list.forEach(dep => {
-    const opt = document.createElement("option");
-    opt.textContent = dep;
-    select.appendChild(opt);
+  deptSelect.innerHTML = "";
+  snap.data().list.forEach(d => {
+    const o = document.createElement("option");
+    o.textContent = d;
+    deptSelect.appendChild(o);
   });
 });

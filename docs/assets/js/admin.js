@@ -1,83 +1,46 @@
-import { db } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 import {
-  collection,
-  addDoc,
-  deleteDoc,
-  getDocs,
-  doc,
-  setDoc,
-  serverTimestamp
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  collection, addDoc, getDocs, deleteDoc, doc, setDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ---------------- SAVE CAR ---------------- */
-window.saveCar = async function () {
-  const name = nameInput.value.trim();
-  const price = priceInput.value.trim();
-  const desc = descInput.value.trim();
-  const image = imageInput.value;
-  const isNew = isNewInput.checked;
+onAuthStateChanged(auth,user=>{
+  if(!user) location.href="login.html";
+});
 
-  if (!name || !price) {
-    alert("Name and price are required");
-    return;
-  }
-
-  await addDoc(collection(db, "cars"), {
-    name,
-    price,
-    description: desc,
-    image,
-    isNew,
-    updatedAt: serverTimestamp()
+window.saveCar = async ()=>{
+  await addDoc(collection(db,"cars"),{
+    name:name.value,
+    price:price.value,
+    description:desc.value,
+    image:image.value,
+    isNew:isNew.checked
   });
-
-  alert("Car saved successfully");
-  document.querySelector(".form").reset();
-  loadCarsForDelete();
+  alert("Saved");
 };
 
-/* ---------------- DELETE CAR ---------------- */
-async function loadCarsForDelete() {
-  const snap = await getDocs(collection(db, "cars"));
-  const select = document.getElementById("deleteCarSelect");
-  select.innerHTML = "";
+window.deleteCar = async ()=>{
+  await deleteDoc(doc(db,"cars",deleteCarSelect.value));
+  alert("Deleted");
+};
 
-  snap.forEach(d => {
-    const opt = document.createElement("option");
-    opt.value = d.id;
-    opt.textContent = d.data().name;
-    select.appendChild(opt);
+window.saveAbout = async ()=>{
+  await setDoc(doc(db,"settings","about"),{text:aboutInput.value});
+  alert("Updated");
+};
+
+window.saveDepartments = async ()=>{
+  await setDoc(doc(db,"settings","departments"),{
+    list:departmentsInput.value.split(",")
   });
-}
-
-window.deleteCar = async function () {
-  const id = document.getElementById("deleteCarSelect").value;
-  if (!id) return;
-
-  await deleteDoc(doc(db, "cars", id));
-  alert("Car deleted");
-  loadCarsForDelete();
+  alert("Updated");
 };
 
-/* ---------------- ABOUT ---------------- */
-window.saveAbout = async function () {
-  const text = document.getElementById("aboutInput").value.trim();
-  if (!text) return alert("About text required");
-
-  await setDoc(doc(db, "settings", "about"), { text });
-  alert("About section updated");
-};
-
-/* ---------------- DEPARTMENTS ---------------- */
-window.saveDepartments = async function () {
-  const list = document.getElementById("departmentsInput")
-    .value.split(",")
-    .map(d => d.trim())
-    .filter(Boolean);
-
-  await setDoc(doc(db, "settings", "departments"), { list });
-  alert("Departments updated");
-};
-
-/* INIT */
-loadCarsForDelete();
+(async ()=>{
+  const snap=await getDocs(collection(db,"cars"));
+  snap.forEach(d=>{
+    deleteCarSelect.innerHTML+=`<option value="${d.id}">${d.data().name}</option>`;
+  });
+})();

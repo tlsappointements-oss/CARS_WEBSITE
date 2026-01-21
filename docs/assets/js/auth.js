@@ -1,25 +1,23 @@
 import { auth } from "./firebase.js";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-window.login = () => {
-  signInWithEmailAndPassword(
-    auth,
-    email.value,
-    password.value
-  ).then(() => {
+window.login = async () => {
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth,email,pass);
     location.href = "admin.html";
-  }).catch(() => {
-    error.innerText = "Wrong email or password";
-  });
+  } catch {
+    alert("Wrong email or password");
+  }
 };
 
-window.logout = () => {
-  signOut(auth).then(() => location.href = "login.html");
-};
-
-onAuthStateChanged(auth, user => {
-  if (!user && location.pathname.includes("admin.html")) {
-    location.href = "login.html";
+onAuthStateChanged(auth,user=>{
+  if(user && location.pathname.includes("login")) {
+    location.href="admin.html";
   }
 });
