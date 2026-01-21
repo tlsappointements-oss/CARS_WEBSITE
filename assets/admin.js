@@ -10,14 +10,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-/* 🔐 PROTECT PAGE */
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    window.location.href = "login.html";
+    window.location.replace("login.html");
   }
 });
-
-/* LOGOUT */
-document.getElementById("logout").onclick = () => {
-  signOut(auth).then(() => location.href = "login.html");
-};
