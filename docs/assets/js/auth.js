@@ -1,25 +1,31 @@
 import { auth } from "./firebase.js";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-window.login = () => {
-  signInWithEmailAndPassword(
-    auth,
-    email.value,
-    password.value
-  ).then(() => {
-    location.href = "admin.html";
-  }).catch(() => {
-    error.innerText = "Wrong email or password";
-  });
+window.login = async () => {
+  const emailVal = document.getElementById("email").value;
+  const passVal = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, emailVal, passVal);
+    window.location.href = "admin.html";
+  } catch (err) {
+    document.getElementById("error").innerText =
+      "Wrong email or password";
+  }
 };
 
-window.logout = () => {
-  signOut(auth).then(() => location.href = "login.html");
+window.logout = async () => {
+  await signOut(auth);
+  window.location.href = "login.html";
 };
 
+/* 🔒 PROTECT ADMIN PAGE */
 onAuthStateChanged(auth, user => {
-  if (!user && location.pathname.includes("admin.html")) {
-    location.href = "login.html";
+  if (!user && window.location.pathname.includes("admin.html")) {
+    window.location.href = "login.html";
   }
 });
