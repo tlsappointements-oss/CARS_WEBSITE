@@ -1,19 +1,38 @@
-<<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Admin Login</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="login">
+<body class="centered">
 
-<h2>Admin Login</h2>
+<div class="login-box">
+  <h2>Admin Login</h2>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <p id="error"></p>
+</div>
 
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
+<script type="module">
+  import { auth } from "./assets/js/firebase.js";
+  import { signInWithEmailAndPassword } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-<p id="error"></p>
+  document.getElementById("loginBtn").addEventListener("click", async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const error = document.getElementById("error");
 
-<script type="module" src="assets/js/auth.js"></script>
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      window.location.href = "admin.html";
+    } catch (e) {
+      error.innerText = e.code;
+    }
+  });
+</script>
+
 </body>
 </html>

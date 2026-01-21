@@ -32,16 +32,3 @@ window.saveCar = async function () {
 
   document.querySelector(".form").reset();
 };
-import {
-  setDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-window.saveLayout = async function () {
-  const columns = Number(document.getElementById("columns").value);
-
-  await setDoc(doc(db, "settings", "layout"), {
-    columns
-  });
-
-  alert("Layout updated successfully");
-};

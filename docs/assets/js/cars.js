@@ -30,28 +30,3 @@ onSnapshot(q, snapshot => {
     `;
   });
 });
-	
-import { doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const carsGrid = document.getElementById("cars");
-
-onSnapshot(doc(db, "settings", "layout"), snap => {
-  if (!snap.exists()) return;
-
-  const layout = snap.data();
-  carsGrid.style.gridTemplateColumns = `repeat(${layout.columns}, 1fr)`;
-});
-import {
-  collection,
-  onSnapshot,
-  query,
-  orderBy,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-onSnapshot(doc(db, "settings", "layout"), snap => {
-  if (!snap.exists()) return;
-
-  const layout = snap.data();
-  carsContainer.style.gridTemplateColumns =
-    `repeat(${layout.columns}, 1fr)`;
-});
