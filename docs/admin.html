@@ -1,31 +1,30 @@
-<script type="module">
-  import { auth } from "./assets/js/firebase.js";
-  import { onAuthStateChanged } from
-    "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  document.body.style.display = "none";
-
-  onAuthStateChanged(auth, user => {
-    if (!user) {
-      window.location.replace("login.html");
-    } else {
-      document.body.style.display = "block";
-    }
-  });
-</script>
 <!DOCTYPE html>
-<html lang="en" style="visibility:hidden;">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- HARD LOCK (LOADS FIRST) -->
-  <script type="module" src="assets/js/admin-guard.js"></script>
+  <!-- ✅ SINGLE HARD LOCK -->
+  <script type="module">
+    import { auth } from "./assets/js/firebase.js";
+    import { onAuthStateChanged } from
+      "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.style.display = "none";
+
+      onAuthStateChanged(auth, user => {
+        if (!user) {
+          window.location.replace("login.html");
+        } else {
+          document.body.style.display = "block";
+        }
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -60,6 +59,7 @@
   </main>
 </div>
 
+<!-- LOGOUT -->
 <script type="module">
   import { auth } from "./assets/js/firebase.js";
   import { signOut } from
