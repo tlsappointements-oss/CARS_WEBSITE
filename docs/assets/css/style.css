@@ -1,62 +1,112 @@
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f2f2f2;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
 }
 
-header {
+.header {
   background: black;
   color: white;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 15px 40px;
+  align-items: center;
 }
 
-.logo {
-  height: 40px;
-}
+.logo { height: 40px; }
 
-nav a {
+.header a {
   color: white;
   margin-left: 20px;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .hero {
-  height: 70vh;
-  background: url("../assets/images/car1.png") center/cover no-repeat;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
+  padding: 60px;
+  background: #111;
+  color: white;
 }
 
-.cars, .services {
-  padding: 60px;
-  background: white;
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  gap: 25px;
+  padding: 40px;
 }
 
 .car {
-  display: flex;
-  gap: 20px;
-  background: #fafafa;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
 }
 
 .car img {
-  width: 220px;
-  border-radius: 8px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
-footer {
-  background: black;
+.car-content {
+  padding: 15px;
+}
+
+.badge {
+  background: red;
   color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.footer {
   text-align: center;
   padding: 20px;
+  background: #111;
+  color: white;
+}
+
+.centered {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+
+.login-box input, .login-box button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.admin-layout {
+  display: flex;
+  height: 100vh;
+}
+
+aside {
+  width: 220px;
+  background: black;
+  color: white;
+  padding: 20px;
+}
+
+main {
+  flex: 1;
+  padding: 40px;
+}
+
+.form input, .form textarea, .form select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
 }

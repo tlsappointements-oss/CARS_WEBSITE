@@ -2,18 +2,40 @@
 <html>
 <head>
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="assets/admin.css">
-  <script type="module" src="assets/admin.js"></script>
-  <style>body{display:none}</style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<header>
-  <span>Admin Dashboard</span>
-  <button id="logout">Logout</button>
-</header>
+<div class="admin-layout">
+  <aside>
+    <h2>Admin</h2>
+    <button onclick="logout()">Logout</button>
+  </aside>
 
-<main id="cars"></main>
+  <main>
+    <h1>Manage Cars</h1>
 
+    <div class="form">
+      <input id="name" placeholder="Car name">
+      <input id="price" placeholder="Price">
+      <textarea id="desc" placeholder="Description"></textarea>
+
+      <select id="image">
+        <option value="a-class.jpg">A-Class</option>
+        <option value="c-class.jpg">C-Class</option>
+        <option value="e-class.jpg">E-Class</option>
+        <option value="s-class.jpg">S-Class</option>
+      </select>
+
+      <label>
+        <input type="checkbox" id="isNew"> New model
+      </label>
+
+      <button onclick="saveCar()">Save Car</button>
+    </div>
+  </main>
+</div>
+
+<script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>
