@@ -4,8 +4,8 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase
 
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID"
+  authDomain: "cars-website-558c0.firebaseapp.com",
+  projectId: "cars-website-558c0"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -10,5 +10,5 @@ window.saveCar = async () => {
     image: image.value,
     isNew: isNew.checked
   });
-  alert("Car saved");
+  alert("Car saved successfully");
 };
