@@ -2,29 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Mercedes-Benz | Admin Login</title>
+  <title>Mercedes-Benz | Secure Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body class="login-page">
 
 <!-- BACKGROUND -->
-<div class="login-bg"></div>
+<div class="login-background"></div>
 
-<!-- LOGIN CARD -->
-<div class="login-card">
-  <img src="./assets/images/logo.png" class="login-logo" alt="Mercedes-Benz">
-  <h1>Admin Access</h1>
-  <p>Authorized personnel only</p>
+<!-- LOGIN COVER -->
+<div class="login-cover">
 
-  <input id="email" type="email" placeholder="Email address">
-  <input id="password" type="password" placeholder="Password">
+  <!-- LOGO -->
+  <div class="login-brand">
+    <img src="assets/images/Mercedes.png" alt="Mercedes-Benz Logo">
+    <span>Mercedes-Benz</span>
+  </div>
 
-  <button onclick="login()">Sign In</button>
+  <!-- FORM -->
+  <div class="login-form">
+    <h1>Admin Login</h1>
+    <p>Restricted access • Authorized users only</p>
 
-  <span class="login-note">Mercedes-Benz Internal System</span>
+    <input type="email" id="email" placeholder="Email address">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Sign In</button>
+
+    <small>Mercedes-Benz Internal System</small>
+  </div>
+
 </div>
 
-<script src="./assets/js/auth.js"></script>
+<script src="assets/js/auth.js"></script>
 </body>
 </html>
