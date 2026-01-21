@@ -1,155 +1,155 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing:border-box; margin:0; padding:0 }
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #0b0b0b;
-  color: #fff;
+  background:#0c0c0c;
+  color:#fff;
 }
 
 .header {
-  height: 70px;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #000;
+  height:72px;
+  padding:0 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#000;
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 20px;
-  font-weight: 500;
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
-.brand img {
-  height: 36px;
-}
+.brand img { height:38px }
+.brand span { font-size:20px; letter-spacing:1px }
 
-.menu {
-  position: relative;
-}
+.nav-right { position:relative }
 
 .dots {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 28px;
-  cursor: pointer;
+  background:none;
+  border:none;
+  font-size:28px;
+  color:white;
+  cursor:pointer;
 }
 
 .dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background: #111;
-  border: 1px solid #333;
-  min-width: 180px;
+  display:none;
+  position:absolute;
+  right:0;
+  top:40px;
+  background:#111;
+  border:1px solid #333;
 }
 
 .dropdown a {
-  display: block;
-  padding: 12px 16px;
-  color: white;
-  text-decoration: none;
+  display:block;
+  padding:14px 20px;
+  color:white;
+  text-decoration:none;
 }
 
-.dropdown a:hover {
-  background: #222;
-}
+.dropdown a:hover { background:#222 }
 
 .hero {
-  padding: 100px 20px;
-  text-align: center;
+  padding:90px 20px;
+  text-align:center;
 }
 
-.hero h1 {
-  font-size: 48px;
-  margin-bottom: 12px;
-}
-
-.hero p {
-  color: #aaa;
-}
+.hero h1 { font-size:48px }
+.hero p { color:#aaa }
 
 .cars-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  padding: 60px;
+  padding:60px;
+  display:grid;
+  gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 }
 
 .car {
-  background: #111;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s;
+  background:#111;
+  border-radius:14px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .3s;
 }
 
-.car:hover {
-  transform: translateY(-6px);
-}
+.car:hover { transform:translateY(-6px) }
 
 .car img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
+  width:100%;
+  height:220px;
+  object-fit:cover;
 }
 
-.car-info {
-  padding: 20px;
-}
-
-.car-info h3 {
-  font-size: 22px;
-  margin-bottom: 8px;
-}
-
-.car-info p {
-  color: #aaa;
-}
-
-.page {
-  max-width: 900px;
-  margin: 80px auto;
-  padding: 0 20px;
-}
-
-.page h1 {
-  font-size: 42px;
-  margin-bottom: 20px;
-}
-
-.page p {
-  font-size: 18px;
-  line-height: 1.7;
-  color: #ccc;
-  margin-bottom: 16px;
-}
-
-.departments {
-  list-style: none;
-  margin-top: 20px;
-}
-
-.departments li {
-  padding: 14px;
-  border-bottom: 1px solid #333;
-}
+.car h3 { padding:15px; text-align:center }
 
 .footer {
-  text-align: center;
-  padding: 30px;
-  color: #777;
+  text-align:center;
+  padding:30px;
+  color:#777;
 }
 
-.back {
-  color: #fff;
-  text-decoration: none;
+/* MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
 }
+
+.modal img {
+  max-width:80%;
+  max-height:60vh;
+}
+
+.close {
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:36px;
+  cursor:pointer;
+}
+
+/* LOGIN */
+.centered {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.login-box {
+  background:#111;
+  padding:40px;
+  width:320px;
+  text-align:center;
+  border-radius:12px;
+}
+
+.login-box input, .login-box button {
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:none;
+}
+
+.login-box button {
+  background:white;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ADMIN */
+.admin-layout { display:flex; height:100vh }
+aside {
+  width:240px;
+  background:black;
+  padding:30px;
+}
+main { flex:1; padding:40px }

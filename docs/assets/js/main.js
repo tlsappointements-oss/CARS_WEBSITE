@@ -1,37 +1,37 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const cars = [
+  { title:"C-Class", img:"assets/images/car1.jpg" },
+  { title:"E-Class", img:"assets/images/car2.jpg" },
+  { title:"S-Class", img:"assets/images/car3.jpg" }
+];
 
-const app = initializeApp({
-  apiKey: "AIzaSyDnp4fC2_cEw04ydtWOwYgVzRUsqScufFs",
-  authDomain: "cars-website-558c0.firebaseapp.com",
-  projectId: "cars-website-558c0"
-});
+let index = 0;
 
-const db = getFirestore(app);
-const list = document.getElementById("carsList");
-
-const snap = await getDocs(collection(db,"cars"));
-snap.forEach(d=>{
-  const c=d.data();
-  list.innerHTML += `
-    <div class="car">
-      <img src="${c.image}">
-      <div>
-        <h3>${c.name}</h3>
-        <p>${c.description}</p>
-        <strong>${c.price} €</strong>
-        ${c.isNew ? "<span style='color:red'> NEW</span>" : ""}
-      </div>
-    </div>`;
-});
 function toggleMenu() {
-  const menu = document.getElementById("dropdown");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
+  const d = document.getElementById("dropdown");
+  d.style.display = d.style.display === "block" ? "none" : "block";
 }
 
-document.addEventListener("click", e => {
-  if (!e.target.closest(".menu")) {
-    const menu = document.getElementById("dropdown");
-    if (menu) menu.style.display = "none";
-  }
-});
+function openCar(i) {
+  index = i;
+  updateModal();
+  document.getElementById("carModal").style.display="flex";
+}
+
+function closeCar() {
+  document.getElementById("carModal").style.display="none";
+}
+
+function nextCar() {
+  index = (index + 1) % cars.length;
+  updateModal();
+}
+
+function prevCar() {
+  index = (index - 1 + cars.length) % cars.length;
+  updateModal();
+}
+
+function updateModal() {
+  document.getElementById("modalImg").src = cars[index].img;
+  document.getElementById("modalTitle").textContent = cars[index].title;
+}

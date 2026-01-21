@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,58 +6,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
 
 <header class="header">
   <div class="brand">
-    <img src="assets/images/logo.png" alt="Mercedes Logo">
+    <img src="assets/images/logo.png">
     <span>Mercedes-Benz</span>
   </div>
 
-  <div class="menu">
+  <div class="nav-right">
     <button class="dots" onclick="toggleMenu()">?</button>
-    <div id="dropdown" class="dropdown">
+    <div class="dropdown" id="dropdown">
       <a href="about.html">About</a>
       <a href="departments.html">Company Departments</a>
+      <a href="login.html">Admin</a>
     </div>
   </div>
 </header>
 
 <section class="hero">
-  <h1>Explore Our Models</h1>
-  <p>Luxury. Performance. Innovation.</p>
+  <h1>Our Models</h1>
+  <p>Luxury • Performance • Innovation</p>
 </section>
 
 <section class="cars-grid">
-  <div class="car">
+  <div class="car" onclick="openCar(0)">
     <img src="assets/images/car1.jpg">
-    <div class="car-info">
-      <h3>C-Class</h3>
-      <p>From €45,000</p>
-    </div>
+    <h3>C-Class</h3>
   </div>
-
-  <div class="car">
+  <div class="car" onclick="openCar(1)">
     <img src="assets/images/car2.jpg">
-    <div class="car-info">
-      <h3>E-Class</h3>
-      <p>From €60,000</p>
-    </div>
+    <h3>E-Class</h3>
   </div>
-
-  <div class="car">
+  <div class="car" onclick="openCar(2)">
     <img src="assets/images/car3.jpg">
-    <div class="car-info">
-      <h3>S-Class</h3>
-      <p>From €95,000</p>
-    </div>
+    <h3>S-Class</h3>
   </div>
 </section>
 
-<footer class="footer">
-  © 2026 Mercedes-Benz
-</footer>
+<footer class="footer">© 2026 Mercedes-Benz</footer>
+
+<!-- MODAL -->
+<div class="modal" id="carModal">
+  <span class="close" onclick="closeCar()">×</span>
+  <img id="modalImg">
+  <h2 id="modalTitle"></h2>
+  <div class="modal-nav">
+    <button onclick="prevCar()">‹</button>
+    <button onclick="nextCar()">›</button>
+  </div>
+</div>
 
 <script src="assets/js/main.js"></script>
 </body>
