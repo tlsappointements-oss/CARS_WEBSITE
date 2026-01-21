@@ -30,3 +30,19 @@ onSnapshot(q, snapshot => {
     `;
   });
 });
+onSnapshot(doc(db, "settings", "about"), snap => {
+  if (!snap.exists()) return;
+  document.getElementById("aboutText").textContent = snap.data().text;
+});
+onSnapshot(doc(db, "settings", "departments"), snap => {
+  if (!snap.exists()) return;
+
+  const select = document.getElementById("departments");
+  select.innerHTML = "";
+
+  snap.data().list.forEach(dep => {
+    const opt = document.createElement("option");
+    opt.textContent = dep;
+    select.appendChild(opt);
+  });
+});
