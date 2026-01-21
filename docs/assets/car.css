@@ -1,0 +1,28 @@
+body {
+  font-family: Arial;
+  background: #f4f4f4;
+  margin: 0;
+}
+
+.topbar {
+  background: #000;
+  color: #fff;
+  padding: 20px;
+}
+
+.car-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 60px;
+  background: #fff;
+}
+
+.car-details img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.info p {
+  font-size: 18px;
+}

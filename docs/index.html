@@ -3,38 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Mercedes-Benz Dealer</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 
-<header>
+<header class="topbar">
   <img src="assets/images/logo.png" class="logo">
   <nav>
-    <a href="#cars">Cars</a>
-    <a href="#services">Services</a>
+    <a href="index.html">Cars</a>
     <a href="login.html">Admin</a>
   </nav>
 </header>
 
 <section class="hero">
   <h1>The Best or Nothing</h1>
-  <p>Official Mercedes-Benz Partner</p>
+  <p>Premium Mercedes-Benz Vehicles</p>
 </section>
 
-<section id="cars" class="cars">
-  <h2>Our Cars</h2>
-  <div id="carsList"></div>
-</section>
-
-<section id="services" class="services">
-  <h2>Our Services</h2>
-  <div class="service">? New & Used Mercedes</div>
-  <div class="service">? Leasing & Financing</div>
-  <div class="service">? Maintenance & Repairs</div>
+<section class="cars-section">
+  <h2>Available Cars</h2>
+  <div class="cars-grid" id="carsGrid"></div>
 </section>
 
 <footer>© 2026 Mercedes-Benz Dealer</footer>
 
-<script type="module" src="assets/main.js"></script>
+<script src="assets/js/cars.js"></script>
 </body>
 </html>
