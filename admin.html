@@ -1,29 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Mercedes Admin</title>
-
-  <!-- HIDE PAGE BY DEFAULT -->
-  <style>
-    body { display: none; }
-  </style>
-
-  <!-- LOAD SCRIPT FIRST -->
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="assets/admin.css">
   <script type="module" src="assets/admin.js"></script>
+  <style>body{display:none}</style>
 </head>
-
 <body>
 
-<header style="background:black;color:white;padding:15px">
-  Mercedes Admin Dashboard
-  <button id="logout" style="float:right">Logout</button>
+<header>
+  Admin Dashboard
+  <button id="logout">Logout</button>
 </header>
 
-<div style="padding:20px">
-  <h2>Cars</h2>
-  <div id="cars"></div>
-</div>
+<main id="cars"></main>
 
 </body>
 </html>

@@ -1,0 +1,24 @@
+body { margin:0; font-family:Arial; background:#f5f5f5; }
+header {
+  background:black; color:white;
+  display:flex; justify-content:space-between;
+  padding:15px 40px; align-items:center;
+}
+.logo { height:40px; }
+nav a { color:white; margin-left:20px; text-decoration:none; }
+.hero {
+  background:url('../images/car1.png') center/cover;
+  height:70vh; color:white;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+}
+.cars, .services { padding:60px; }
+.car {
+  background:white; padding:20px; margin-bottom:20px;
+  display:flex; gap:20px;
+}
+.car img { width:200px; }
+footer {
+  background:black; color:white;
+  text-align:center; padding:20px;
+}

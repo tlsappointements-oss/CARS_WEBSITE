@@ -1,17 +1,22 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const firebaseConfig = {
+const app = initializeApp({
   apiKey: "AIzaSyDnp4fC2_cEw04ydtWOwYgVzRUsqScufFs",
-  authDomain: "cars-website-558c0.firebaseapp.com",
-  projectId: "cars-website-558c0"
-};
+  authDomain: "cars-website-558c0.firebaseapp.com"
+});
 
-const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-window.login = function () {
-  signInWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => location.href = "admin.html")
-    .catch(() => error.innerText = "Wrong email or password");
+document.getElementById("login").onclick = async ()=>{
+  try{
+    await signInWithEmailAndPassword(
+      auth,
+      email.value,
+      password.value
+    );
+    location.href="admin.html";
+  }catch{
+    error.inner marking = "Wrong email or password";
+  }
 };

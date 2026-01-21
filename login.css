@@ -1,0 +1,16 @@
+body {
+  background:black;
+  display:flex; justify-content:center; align-items:center;
+  height:100vh;
+}
+.login-box {
+  background:white; padding:40px;
+  width:300px; text-align:center;
+}
+.login-box img { height:50px; margin-bottom:20px; }
+input { width:100%; padding:10px; margin-bottom:10px; }
+button {
+  width:100%; padding:10px;
+  background:black; color:white; border:none;
+}
+#error { color:red; }

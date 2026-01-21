@@ -1,18 +1,42 @@
 <!DOCTYPE html>
-<html><head>
-<meta charset='UTF-8'>
-<title>Mercedes-Benz Dealer</title>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet' href='assets/css/style.css'>
-</head><body>
+<html>
+<head>
+  <title>Mercedes-Benz | Official Dealer</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
 <header>
-<img src='assets/images/5.png'>
-<nav><a href='index.html'>Home</a><a href='cars.html'>Vehicles</a></nav>
+  <img src="images/logo.png" class="logo">
+  <nav>
+    <a href="#cars">Cars</a>
+    <a href="#services">Services</a>
+    <a href="login.html">Admin</a>
+  </nav>
 </header>
-<section class='hero'>
-<h1>The Best or Nothing</h1>
-<p>Luxury. Innovation. Performance.</p>
-<a href='cars.html'>Explore Models</a>
+
+<section class="hero">
+  <h1>The Best or Nothing</h1>
+  <p>Luxury, Performance & Innovation</p>
 </section>
-<footer>© Mercedes-Benz Dealer Demo</footer>
-</body></html>
+
+<section id="cars" class="cars">
+  <h2>Our Cars</h2>
+  <div id="carsList"></div>
+</section>
+
+<section id="services" class="services">
+  <h2>Our Services</h2>
+  <div class="service">? Certified New & Used Cars</div>
+  <div class="service">? Financing & Leasing</div>
+  <div class="service">? Maintenance & Repair</div>
+  <div class="service">? Genuine Mercedes Parts</div>
+</section>
+
+<footer>
+  © 2026 Mercedes-Benz Dealer — All Rights Reserved
+</footer>
+
+<script type="module" src="assets/main.js"></script>
+</body>
+</html>
