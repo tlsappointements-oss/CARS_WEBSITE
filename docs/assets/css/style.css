@@ -1,129 +1,41 @@
-:root {
-  --bg: #0b0b0c;
-  --card: #141417;
-  --text: #eaeaea;
-  --muted: #9a9a9a;
-  --accent: #5f9cff;
-}
-
+/* GLOBAL */
 * {
   box-sizing: border-box;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: #f4f4f4;
+  color: #111;
 }
 
 /* HEADER */
-.topbar {
+.header {
+  background: #000;
+  padding: 18px 40px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px 60px;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background: rgba(0,0,0,.8);
-  backdrop-filter: blur(10px);
-  z-index: 100;
 }
 
-.brand {
-  font-weight: 700;
-  font-size: 18px;
+.header img {
+  height: 45px;
 }
 
-.nav {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-}
-
-.nav a {
-  color: var(--text);
+.header nav a {
+  color: white;
   text-decoration: none;
-  font-size: 14px;
-}
-
-/* THREE DOT MENU */
-.menu {
-  cursor: pointer;
-  position: relative;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 25px;
-  background: #1c1c1f;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.menu:hover .dropdown {
-  display: block;
-}
-
-.dropdown a {
-  display: block;
-  padding: 12px 18px;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.dropdown a:hover {
-  background: #26262a;
+  margin-left: 25px;
+  font-weight: 500;
 }
 
 /* HERO */
 .hero {
-  padding: 120px 60px;
+  background: linear-gradient(135deg, #000, #222);
+  color: white;
+  padding: 90px 20px;
   text-align: center;
-  background: radial-gradient(circle at top, #1a1a1f, #000);
-}
-
-.hero h1 {
-  font-size: 52px;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  color: var(--muted);
-  font-size: 18px;
-}
-
-/* SECTIONS */
-section {
-  padding: 80px 60px;
-}
-
-h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
-
-/* ABOUT */
-.about p {
-  max-width: 700px;
-  line-height: 1.7;
-  color: var(--muted);
-}
-
-/* DEPARTMENTS */
-.dept-list {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.dept-list span {
-  padding: 10px 18px;
-  background: var(--card);
-  border-radius: 20px;
-  font-size: 14px;
 }
 
 /* CARS */
@@ -131,18 +43,14 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
-  margin-top: 40px;
+  padding: 50px;
 }
 
 .car-card {
-  background: var(--card);
-  border-radius: 16px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.15);
   overflow: hidden;
-  transition: transform .3s;
-}
-
-.car-card:hover {
-  transform: translateY(-6px);
 }
 
 .car-card img {
@@ -151,39 +59,98 @@ h2 {
   object-fit: cover;
 }
 
-.car-info {
-  padding: 20px;
+.car-card h3 {
+  padding: 15px 20px 0;
 }
 
-.car-info h3 {
-  margin: 0;
+.car-card p {
+  padding: 0 20px;
+  color: #555;
 }
 
-.car-info p {
-  color: var(--muted);
-  font-size: 14px;
+.car-card strong {
+  padding: 15px 20px 25px;
+  display: block;
+  font-size: 18px;
 }
 
-.price {
-  margin-top: 15px;
-  font-weight: 600;
-  color: var(--accent);
-}
-
+/* BADGE */
 .badge {
   position: absolute;
-  background: var(--accent);
-  color: black;
+  background: black;
+  color: white;
   padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
   top: 15px;
   left: 15px;
+  border-radius: 6px;
+}
+
+/* LOGIN */
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  background: white;
+  padding: 40px;
+  width: 340px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+}
+
+.login-box h2 {
+  text-align: center;
+}
+
+.login-box input,
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+}
+
+/* ADMIN */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 240px;
+  background: #000;
+  color: white;
+  padding: 30px;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 40px;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.1);
+}
+
+.card input,
+.card textarea,
+.card select,
+.card button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
 }
 
 /* FOOTER */
 .footer {
+  background: #000;
+  color: white;
   text-align: center;
-  padding: 40px;
-  color: var(--muted);
+  padding: 25px;
 }

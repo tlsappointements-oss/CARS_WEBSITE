@@ -1,46 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Panel</title>
+  <meta charset="UTF-8">
+  <title>Mercedes-Benz Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <script type="module">
+    import { auth } from "./assets/js/firebase.js";
+    import { onAuthStateChanged }
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // HARD BLOCK RENDER
+    document.documentElement.style.display = "none";
+
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        window.location.replace("login.html");
+      } else {
+        document.documentElement.style.display = "block";
+      }
+    });
+  </script>
 </head>
+
 <body>
 
 <div class="admin-layout">
-<aside>
-  <h2>Admin</h2>
-</aside>
+  <aside class="admin-sidebar">
+    <h2>Admin</h2>
+    <button id="logoutBtn">Logout</button>
+  </aside>
 
-<main>
-  <h2>Add Car</h2>
-  <div class="form">
-    <input id="name" placeholder="Name">
-    <input id="price" placeholder="Price">
-    <textarea id="desc" placeholder="Description"></textarea>
-    <select id="image">
-      <option>a-class.jpg</option>
-      <option>c-class.jpg</option>
-      <option>e-class.jpg</option>
-      <option>s-class.jpg</option>
-    </select>
-    <label><input type="checkbox" id="isNew"> New</label>
-    <button onclick="saveCar()">Save</button>
-  </div>
+  <main class="admin-main">
+    <h1>Dashboard</h1>
 
-  <h2>Delete Car</h2>
-  <select id="deleteCarSelect"></select>
-  <button onclick="deleteCar()">Delete</button>
+    <section class="card">
+      <h3>Add Car</h3>
+      <input id="name" placeholder="Car name">
+      <input id="price" placeholder="Price (€)">
+      <textarea id="desc" placeholder="Description"></textarea>
 
-  <h2>About</h2>
-  <textarea id="aboutInput"></textarea>
-  <button onclick="saveAbout()">Save</button>
+      <select id="image">
+        <option value="a-class.jpg">A-Class</option>
+        <option value="c-class.jpg">C-Class</option>
+        <option value="e-class.jpg">E-Class</option>
+        <option value="s-class.jpg">S-Class</option>
+      </select>
 
-  <h2>Departments</h2>
-  <input id="departmentsInput" placeholder="Sales, Design, Motorsport">
-  <button onclick="saveDepartments()">Save</button>
-</main>
+      <label><input type="checkbox" id="isNew"> New model</label>
+      <button onclick="saveCar()">Save</button>
+    </section>
+
+    <section class="card">
+      <h3>Delete Car</h3>
+      <select id="deleteCarSelect"></select>
+      <button onclick="deleteCar()">Delete</button>
+    </section>
+
+    <section class="card">
+      <h3>About Section</h3>
+      <textarea id="aboutInput"></textarea>
+      <button onclick="saveAbout()">Save</button>
+    </section>
+
+    <section class="card">
+      <h3>Departments</h3>
+      <input id="departmentsInput" placeholder="Sales, Service, Finance">
+      <button onclick="saveDepartments()">Save</button>
+    </section>
+
+  </main>
 </div>
 
 <script type="module" src="assets/js/admin.js"></script>
+
 </body>
 </html>
