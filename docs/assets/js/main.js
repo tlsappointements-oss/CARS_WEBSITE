@@ -24,3 +24,14 @@ snap.forEach(d=>{
       </div>
     </div>`;
 });
+function toggleMenu() {
+  const menu = document.getElementById("dropdown");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".menu")) {
+    const menu = document.getElementById("dropdown");
+    if (menu) menu.style.display = "none";
+  }
+});

@@ -4,57 +4,61 @@
   <meta charset="UTF-8">
   <title>Mercedes-Benz | Models</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-<header class="topbar">
-  <div class="brand">Mercedes-Benz</div>
+<header class="header">
+  <div class="brand">
+    <img src="assets/images/logo.png" alt="Mercedes Logo">
+    <span>Mercedes-Benz</span>
+  </div>
 
-  <nav class="nav">
-    <a href="#cars">Models</a>
-    <a href="login.html">Admin</a>
-
-    <!-- Three dots -->
-    <div class="menu">
-      ?
-      <div class="dropdown">
-        <a href="#about">About</a>
-        <a href="#departments">Departments</a>
-      </div>
+  <div class="menu">
+    <button class="dots" onclick="toggleMenu()">?</button>
+    <div id="dropdown" class="dropdown">
+      <a href="about.html">About</a>
+      <a href="departments.html">Company Departments</a>
     </div>
-  </nav>
+  </div>
 </header>
 
 <section class="hero">
-  <h1>Driven by Innovation</h1>
-  <p>Modern luxury meets intelligent performance</p>
+  <h1>Explore Our Models</h1>
+  <p>Luxury. Performance. Innovation.</p>
 </section>
 
-<section id="about" class="about">
-  <h2>About Mercedes-Benz</h2>
-  <p id="aboutText">Loading...</p>
-</section>
+<section class="cars-grid">
+  <div class="car">
+    <img src="assets/images/car1.jpg">
+    <div class="car-info">
+      <h3>C-Class</h3>
+      <p>From €45,000</p>
+    </div>
+  </div>
 
-<section id="departments" class="departments">
-  <h2>Company Departments</h2>
-  <div id="departmentsList" class="dept-list"></div>
-</section>
+  <div class="car">
+    <img src="assets/images/car2.jpg">
+    <div class="car-info">
+      <h3>E-Class</h3>
+      <p>From €60,000</p>
+    </div>
+  </div>
 
-<section id="cars" class="cars">
-  <h2>Our Models</h2>
-  <div class="cars-grid" id="carsGrid"></div>
+  <div class="car">
+    <img src="assets/images/car3.jpg">
+    <div class="car-info">
+      <h3>S-Class</h3>
+      <p>From €95,000</p>
+    </div>
+  </div>
 </section>
 
 <footer class="footer">
-  © 2026 Mercedes-Benz — Modern Luxury
+  © 2026 Mercedes-Benz
 </footer>
 
-<script type="module" src="assets/js/cars.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
