@@ -4,6 +4,44 @@
   <meta charset="UTF-8">
   <title>Mercedes-Benz | Admin Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="login-page">
+
+<div class="login-container">
+
+  <div class="login-box">
+
+    <!-- BRAND -->
+    <div class="login-brand">
+      <img src="assets/images/Mercedes.jpg" alt="Mercedes-Benz">
+      <span>Mercedes-Benz</span>
+    </div>
+
+    <!-- FORM -->
+    <h1>Admin Access</h1>
+    <p>Authorized personnel only</p>
+
+    <input type="email" id="email" placeholder="Email address">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Sign in</button>
+
+    <small>Mercedes-Benz Internal System</small>
+  </div>
+
+</div>
+
+<script src="assets/js/auth.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -15,29 +53,25 @@
 <div class="login-container">
   <div class="login-box">
 
-    <!-- BRAND -->
     <div class="login-brand">
-      <img src="assets/images/Mercedes.jpg" alt="Mercedes-Benz">
+      <img src="assets/images/Mercedes.jpg" alt="Mercedes">
       <span>Mercedes-Benz</span>
     </div>
 
-    <!-- FORM -->
     <h1>Admin Login</h1>
     <p>Authorized access only</p>
 
-    <input type="email" id="email" placeholder="Email address">
-    <input type="password" id="password" placeholder="Password">
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
 
-    <button id="loginBtn">Sign in</button>
+    <button id="loginBtn">Login</button>
 
-    <p id="error" style="color:red;margin-top:12px;display:none;"></p>
+    <p id="error" style="color:red;margin-top:12px;"></p>
 
-    <small>Mercedes-Benz Internal System</small>
   </div>
 </div>
 
-<!-- ✅ ONLY ONE SCRIPT, MODULE -->
+<!-- ✅ LOAD JS LAST -->
 <script type="module" src="assets/js/login.js"></script>
-
 </body>
 </html>

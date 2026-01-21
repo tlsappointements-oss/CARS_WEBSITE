@@ -1,24 +1,44 @@
-<main>
-  <h1>Administration</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 🔽 SELECT PANEL -->
-  <div class="admin-section">
-    <h2>Select what to manage</h2>
-    <select id="panelSelect" onchange="switchPanel()">
-      <option value="cars">Cars</option>
-      <option value="about">About</option>
-      <option value="departments">Departments</option>
-    </select>
-  </div>
+  <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- 🚗 CARS PANEL -->
-  <div id="carsPanel" class="admin-section">
+  <!-- ✅ SINGLE HARD LOCK -->
+  <script type="module">
+    import { auth } from "./assets/js/firebase.js";
+    import { onAuthStateChanged } from
+      "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    <h2>Add / Edit Car</h2>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.style.display = "none";
+
+      onAuthStateChanged(auth, user => {
+        if (!user) {
+          window.location.replace("login.html");
+        } else {
+          document.body.style.display = "block";
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+<div class="admin-layout">
+  <aside>
+    <h2>Admin Panel</h2>
+    <button onclick="logout()">Logout</button>
+  </aside>
+
+  <main>
+    <h1>Manage Cars</h1>
 
     <div class="form">
-      <input id="carId" type="hidden">
-
       <input id="name" placeholder="Car name">
       <input id="price" placeholder="Price (€)">
       <textarea id="desc" placeholder="Description"></textarea>
@@ -36,32 +56,22 @@
 
       <button onclick="saveCar()">Save Car</button>
     </div>
+  </main>
+</div>
 
-    <hr style="margin:40px 0;border-color:#222">
+<!-- LOGOUT -->
+<script type="module">
+  import { auth } from "./assets/js/firebase.js";
+  import { signOut } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    <h2>Existing Cars</h2>
+  window.logout = async () => {
+    await signOut(auth);
+    window.location.replace("login.html");
+  };
+</script>
 
-    <select id="carsList" onchange="loadCarForEdit()"></select>
+<script type="module" src="assets/js/admin.js"></script>
 
-    <button class="danger" onclick="deleteCar()">Delete Selected Car</button>
-  </div>
-
-  <!-- 📝 ABOUT PANEL -->
-  <div id="aboutPanel" class="admin-section" style="display:none">
-    <h2>Edit About Section</h2>
-
-    <textarea id="aboutInput" placeholder="Website bio / about text"></textarea>
-
-    <button onclick="saveAbout()">Save About</button>
-  </div>
-
-  <!-- 🏢 DEPARTMENTS PANEL -->
-  <div id="departmentsPanel" class="admin-section" style="display:none">
-    <h2>Edit Company Departments</h2>
-
-    <textarea id="departmentsInput"
-      placeholder="Comma separated (Sales, R&D, Design, Motorsport)"></textarea>
-
-    <button onclick="saveDepartments()">Save Departments</button>
-  </div>
-</main>
+</body>
+</html>
