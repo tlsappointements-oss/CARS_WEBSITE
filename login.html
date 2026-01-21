@@ -2,13 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
-  <script type="module" src="assets/admin.js"></script>
+  <title>Mercedes Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="assets/login.js"></script>
 </head>
-<body>
-  <h1>Admin Dashboard</h1>
-  <button id="logout">Logout</button>
+<body style="font-family:Arial;background:#f5f5f5">
 
-  <div id="cars"></div>
+  <div style="max-width:400px;margin:100px auto;background:white;padding:30px;border-radius:8px;text-align:center">
+    <img src="images/5.png" style="height:60px"><br><br>
+    <h2>Admin Login</h2>
+
+    <input id="email" type="email" placeholder="Email" style="width:100%;padding:10px"><br><br>
+    <input id="password" type="password" placeholder="Password" style="width:100%;padding:10px"><br><br>
+
+    <button onclick="login()" style="width:100%;padding:10px;background:black;color:white">Login</button>
+    <p id="error" style="color:red"></p>
+  </div>
+
 </body>
 </html>
