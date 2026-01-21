@@ -5,7 +5,7 @@
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- 🔒 ADMIN PROTECTION -->
+  <!-- 🔒 AUTH GUARD (NO FLASH) -->
   <script type="module">
     import { auth } from "./assets/js/firebase.js";
     import { onAuthStateChanged, signOut } from
@@ -13,22 +13,27 @@
 
     onAuthStateChanged(auth, user => {
       if (!user) {
-        window.location.href = "login.html";
+        // ❌ Not authenticated → redirect instantly
+        window.location.replace("login.html");
+      } else {
+        // ✅ Authenticated → show admin
+        document.body.style.display = "block";
       }
     });
 
     window.logout = async () => {
       await signOut(auth);
-      window.location.href = "login.html";
+      window.location.replace("login.html");
     };
   </script>
 </head>
 
-<body>
+<!-- 🚫 BODY IS HIDDEN BY DEFAULT -->
+<body style="display:none;">
 
 <div class="admin-layout">
   <aside>
-    <h2>Admin</h2>
+    <h2>Admin Panel</h2>
     <button onclick="logout()">Logout</button>
   </aside>
 
@@ -37,7 +42,7 @@
 
     <div class="form">
       <input id="name" placeholder="Car name">
-      <input id="price" placeholder="Price">
+      <input id="price" placeholder="Price (€)">
       <textarea id="desc" placeholder="Description"></textarea>
 
       <select id="image">
