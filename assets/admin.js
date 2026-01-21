@@ -12,29 +12,37 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* 🔐 PROTECT PAGE */
+/* 🔐 HARD PROTECTION */
 onAuthStateChanged(auth, (user) => {
-  if (!user) location.replace("login.html");
+  if (!user) {
+    window.location.replace("login.html");
+  } else {
+    // SHOW PAGE ONLY IF LOGGED IN
+    document.body.style.display = "block";
+    loadCars();
+  }
 });
 
 /* LOGOUT */
-logout.onclick = () => signOut(auth).then(() => location.href = "login.html");
+document.getElementById("logout").onclick = () => {
+  signOut(auth).then(() => location.href = "login.html");
+};
 
 /* LOAD CARS */
 async function loadCars() {
   const snap = await getDocs(collection(db, "cars"));
-  cars.innerHTML = "";
+  const container = document.getElementById("cars");
+  container.innerHTML = "";
 
   snap.forEach(d => {
     const c = d.data();
-    cars.innerHTML += `
-      <div class="car">
+    container.innerHTML += `
+      <div style="background:white;padding:10px;margin-bottom:10px">
         <input id="name-${d.id}" value="${c.name}">
         <input id="price-${d.id}" value="${c.price}">
         <textarea id="desc-${d.id}">${c.description}</textarea>
         <label>
-          <input type="checkbox" id="new-${d.id}" ${c.isNew ? "checked" : ""}>
-          NEW
+          <input type="checkbox" id="new-${d.id}" ${c.isNew ? "checked" : ""}> NEW
         </label>
         <button onclick="saveCar('${d.id}')">Save</button>
       </div>
@@ -51,5 +59,3 @@ window.saveCar = async function(id) {
   });
   alert("Saved");
 };
-
-loadCars();

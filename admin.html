@@ -3,17 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Mercedes Admin</title>
-  <link rel="stylesheet" href="assets/admin.css">
+
+  <!-- HIDE PAGE BY DEFAULT -->
+  <style>
+    body { display: none; }
+  </style>
+
+  <!-- LOAD SCRIPT FIRST -->
   <script type="module" src="assets/admin.js"></script>
 </head>
+
 <body>
 
-<header>
+<header style="background:black;color:white;padding:15px">
   Mercedes Admin Dashboard
-  <button id="logout">Logout</button>
+  <button id="logout" style="float:right">Logout</button>
 </header>
 
-<div class="container">
+<div style="padding:20px">
   <h2>Cars</h2>
   <div id="cars"></div>
 </div>
