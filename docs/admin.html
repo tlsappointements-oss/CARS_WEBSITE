@@ -73,5 +73,61 @@
 
 <script type="module" src="assets/js/admin.js"></script>
 
+<!-- =========================
+     EXTRA ADMIN SECTIONS
+========================= -->
+
+<div class="admin-section">
+
+  <h2>Manage Website Content</h2>
+
+  <select id="adminSelector" onchange="switchAdminSection()">
+    <option value="cars">Edit / Delete Cars</option>
+    <option value="about">Edit About Section</option>
+    <option value="departments">Edit Departments</option>
+  </select>
+
+</div>
+
+<!-- ===== EDIT / DELETE CARS ===== -->
+<div id="editCarsSection" class="admin-section">
+
+  <h2>Edit Existing Cars</h2>
+
+  <select id="editCarSelect" onchange="loadCarForEdit()">
+    <option value="">Select a car</option>
+  </select>
+
+  <button class="danger" onclick="deleteCar()">Delete Selected Car</button>
+
+</div>
+
+<!-- ===== ABOUT SECTION ===== -->
+<div id="aboutSection" class="admin-section" style="display:none">
+
+  <h2>Edit About Section</h2>
+
+  <textarea id="aboutInput" placeholder="Write website bio / about text"></textarea>
+
+  <button onclick="saveAbout()">Save About</button>
+
+</div>
+
+<!-- ===== DEPARTMENTS SECTION ===== -->
+<div id="departmentsSection" class="admin-section" style="display:none">
+
+  <h2>Edit Company Departments</h2>
+
+  <textarea
+    id="departmentsInput"
+    placeholder="Comma separated: Sales, R&D, Design, Motorsport">
+  </textarea>
+
+  <button onclick="saveDepartments()">Save Departments</button>
+
+</div>
+
+
 </body>
+
 </html>
