@@ -4,46 +4,55 @@
   <meta charset="UTF-8">
   <title>Mercedes-Benz | Models</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
-<header class="header">
-  <img src="assets/images/logo.png" class="logo">
-  <nav>
-    <a href="index.html">Models</a>
+<header class="topbar">
+  <div class="brand">Mercedes-Benz</div>
 
+  <nav class="nav">
+    <a href="#cars">Models</a>
+    <a href="login.html">Admin</a>
+
+    <!-- Three dots -->
     <div class="menu">
-      <span class="dots">?</span>
+      ?
       <div class="dropdown">
         <a href="#about">About</a>
         <a href="#departments">Departments</a>
       </div>
     </div>
-
-    <a href="login.html">Admin</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h1>Mercedes-Benz</h1>
-  <p>Luxury. Performance. Innovation.</p>
+  <h1>Driven by Innovation</h1>
+  <p>Modern luxury meets intelligent performance</p>
 </section>
 
 <section id="about" class="about">
-  <h2>About Us</h2>
+  <h2>About Mercedes-Benz</h2>
   <p id="aboutText">Loading...</p>
 </section>
 
 <section id="departments" class="departments">
   <h2>Company Departments</h2>
-  <select id="departmentsSelect"></select>
+  <div id="departmentsList" class="dept-list"></div>
 </section>
 
-<section id="cars" class="cars-grid"></section>
+<section id="cars" class="cars">
+  <h2>Our Models</h2>
+  <div class="cars-grid" id="carsGrid"></div>
+</section>
 
 <footer class="footer">
-  © 2026 Mercedes-Benz Showcase
+  © 2026 Mercedes-Benz — Modern Luxury
 </footer>
 
 <script type="module" src="assets/js/cars.js"></script>

@@ -1,40 +1,54 @@
 import { db } from "./firebase.js";
 import {
-  collection, onSnapshot, doc
+  collection,
+  onSnapshot,
+  query,
+  orderBy,
+  doc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const carsEl = document.getElementById("cars");
-const aboutText = document.getElementById("aboutText");
-const deptSelect = document.getElementById("departmentsSelect");
+/* CARS */
+const carsGrid = document.getElementById("carsGrid");
 
-onSnapshot(collection(db,"cars"), snap => {
-  carsEl.innerHTML = "";
+const q = query(collection(db, "cars"), orderBy("updatedAt", "desc"));
+
+onSnapshot(q, snap => {
+  carsGrid.innerHTML = "";
+
   snap.forEach(d => {
-    const c = d.data();
-    carsEl.innerHTML += `
+    const car = d.data();
+
+    carsGrid.innerHTML += `
       <div class="car-card">
-        ${c.isNew ? `<div class="badge">NEW</div>` : ""}
-        <img src="assets/images/${c.image}">
-        <div class="car-body">
-          <h3>${c.name}</h3>
-          <p>${c.description}</p>
-          <div class="car-price">${c.price} €</div>
+        ${car.isNew ? `<span class="badge">NEW</span>` : ""}
+        <img src="assets/images/${car.image}">
+        <div class="car-info">
+          <h3>${car.name}</h3>
+          <p>${car.description}</p>
+          <div class="price">${car.price} €</div>
         </div>
       </div>
     `;
   });
 });
 
-onSnapshot(doc(db,"settings","about"), snap => {
-  if (snap.exists()) aboutText.textContent = snap.data().text;
+/* ABOUT */
+onSnapshot(doc(db, "settings", "about"), snap => {
+  if (snap.exists()) {
+    document.getElementById("aboutText").textContent = snap.data().text;
+  }
 });
 
-onSnapshot(doc(db,"settings","departments"), snap => {
+/* DEPARTMENTS */
+onSnapshot(doc(db, "settings", "departments"), snap => {
   if (!snap.exists()) return;
-  deptSelect.innerHTML = "";
-  snap.data().list.forEach(d => {
-    const o = document.createElement("option");
-    o.textContent = d;
-    deptSelect.appendChild(o);
+
+  const list = document.getElementById("departmentsList");
+  list.innerHTML = "";
+
+  snap.data().list.forEach(dep => {
+    const span = document.createElement("span");
+    span.textContent = dep;
+    list.appendChild(span);
   });
 });
