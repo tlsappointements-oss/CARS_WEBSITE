@@ -110,3 +110,63 @@ main {
   margin: 10px 0;
   padding: 10px;
 }
+/* ---------- NAV DROPDOWN ---------- */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu {
+  position: relative;
+}
+
+.dots {
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background: white;
+  border-radius: 6px;
+  min-width: 140px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.dropdown a {
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.dropdown a:hover {
+  background: #f2f2f2;
+}
+
+.menu:hover .dropdown {
+  display: block;
+}
+
+/* ---------- ABOUT / DEPARTMENTS ---------- */
+.about, .departments {
+  padding: 60px 40px;
+  background: white;
+  margin: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.departments select {
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+}
