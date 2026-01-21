@@ -1,0 +1,27 @@
+body {
+  font-family: Arial;
+  background: #f5f5f5;
+  margin: 0;
+}
+
+header {
+  background: #000;
+  color: white;
+  padding: 15px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.car {
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  margin-top: 5px;
+}
