@@ -1,93 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
+<!import { db } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* ==========================
+   PANEL SWITCH
+========================== */
+window.switchPanel = function () {
+  const v = document.getElementById("panelSelect").value;
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  document.getElementById("carsPanel").style.display = v === "cars" ? "block" : "none";
+  document.getElementById("aboutPanel").style.display = v === "about" ? "block" : "none";
+  document.getElementById("departmentsPanel").style.display = v === "departments" ? "block" : "none";
+};
 
-  <!-- 🔐 AUTH GUARD -->
-  <script type="module">
-    import { auth } from "./assets/js/firebase.js";
-    import { onAuthStateChanged, signOut }
-      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+/* ==========================
+   CARS CRUD
+========================== */
+const carsCol = collection(db, "cars");
 
-    // Hide page by default
-    document.documentElement.style.display = "none";
+async function loadCars() {
+  const snap = await getDocs(carsCol);
+  const list = document.getElementById("carsList");
 
-    onAuthStateChanged(auth, user => {
-      if (!user) {
-        // ❌ Not logged in → instant redirect
-        window.location.replace("login.html");
-      } else {
-        // ✅ Logged in → show admin
-        document.documentElement.style.display = "block";
-      }
-    });
+  list.innerHTML = "<option value=''>Select car</option>";
 
-    window.logout = async () => {
-      await signOut(auth);
-      window.location.replace("login.html");
-    };
-  </script>
-</head>
+  snap.forEach(d => {
+    const o = document.createElement("option");
+    o.value = d.id;
+    o.textContent = d.data().name;
+    list.appendChild(o);
+  });
+}
 
-<body>
+window.saveCar = async function () {
+  const id = document.getElementById("carId").value;
 
-<div class="admin-layout">
+  const data = {
+    name: name.value,
+    price: price.value,
+    description: desc.value,
+    image: image.value,
+    isNew: isNew.checked,
+    updatedAt: serverTimestamp()
+  };
 
-  <aside>
-    <h2>Admin Panel</h2>
-    <button onclick="logout()">Logout</button>
-  </aside>
+  if (id) {
+    await updateDoc(doc(db, "cars", id), data);
+    alert("Car updated");
+  } else {
+    await addDoc(carsCol, data);
+    alert("Car added");
+  }
 
-  <main>
+  document.querySelector(".form").reset();
+  document.getElementById("carId").value = "";
+  loadCars();
+};
 
-    <h1>Manage Cars</h1>
+window.loadCarForEdit = async function () {
+  const id = carsList.value;
+  if (!id) return;
 
-    <div class="form">
-      <input id="name" placeholder="Car name">
-      <input id="price" placeholder="Price (€)">
-      <textarea id="desc" placeholder="Description"></textarea>
+  const snap = await getDocs(carsCol);
+  snap.forEach(d => {
+    if (d.id === id) {
+      const c = d.data();
+      carId.value = id;
+      name.value = c.name;
+      price.value = c.price;
+      desc.value = c.description;
+      image.value = c.image;
+      isNew.checked = c.isNew;
+    }
+  });
+};
 
-      <select id="image">
-        <option value="a-class.jpg">A-Class</option>
-        <option value="c-class.jpg">C-Class</option>
-        <option value="e-class.jpg">E-Class</option>
-        <option value="s-class.jpg">S-Class</option>
-      </select>
+window.deleteCar = async function () {
+  if (!carsList.value) return;
+  await deleteDoc(doc(db, "cars", carsList.value));
+  alert("Car deleted");
+  loadCars();
+};
 
-      <label>
-        <input type="checkbox" id="isNew"> New model
-      </label>
+/* ==========================
+   ABOUT
+========================== */
+window.saveAbout = async function () {
+  await setDoc(doc(db, "settings", "about"), {
+    text: aboutInput.value
+  });
+  alert("About updated");
+};
 
-      <button onclick="saveCar()">Save Car</button>
-    </div>
+/* ==========================
+   DEPARTMENTS
+========================== */
+window.saveDepartments = async function () {
+  const list = departmentsInput.value.split(",").map(v => v.trim());
+  await setDoc(doc(db, "settings", "departments"), { list });
+  alert("Departments updated");
+};
 
-    <hr>
-
-    <h2>Delete Car</h2>
-    <select id="deleteCarSelect"></select>
-    <button onclick="deleteCar()">Delete Selected Car</button>
-
-    <hr>
-
-    <h2>Edit About Section</h2>
-    <textarea id="aboutInput" rows="5"></textarea>
-    <button onclick="saveAbout()">Save About</button>
-
-    <hr>
-
-    <h2>Company Departments</h2>
-    <input id="departmentsInput" placeholder="Sales, Service, Finance">
-    <button onclick="saveDepartments()">Save Departments</button>
-
-  </main>
-</div>
-
-<script type="module" src="assets/js/admin.js"></script>
-
-</body>
-</html>
+/* INIT */
+loadCars();
