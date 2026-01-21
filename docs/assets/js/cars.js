@@ -3,22 +3,19 @@ import {
   collection,
   onSnapshot,
   query,
-  orderBy
+  orderBy,
+  doc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+/* Cars */
 const carsContainer = document.getElementById("cars");
 
-const q = query(
-  collection(db, "cars"),
-  orderBy("updatedAt", "desc")
-);
+const q = query(collection(db, "cars"), orderBy("updatedAt", "desc"));
 
 onSnapshot(q, snapshot => {
   carsContainer.innerHTML = "";
-
-  snapshot.forEach(doc => {
-    const car = doc.data();
-
+  snapshot.forEach(d => {
+    const car = d.data();
     carsContainer.innerHTML += `
       <div class="car-card">
         ${car.isNew ? `<span class="badge">NEW</span>` : ""}
@@ -30,10 +27,15 @@ onSnapshot(q, snapshot => {
     `;
   });
 });
+
+/* About */
 onSnapshot(doc(db, "settings", "about"), snap => {
-  if (!snap.exists()) return;
-  document.getElementById("aboutText").textContent = snap.data().text;
+  if (snap.exists()) {
+    document.getElementById("aboutText").textContent = snap.data().text;
+  }
 });
+
+/* Departments */
 onSnapshot(doc(db, "settings", "departments"), snap => {
   if (!snap.exists()) return;
 

@@ -3,13 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Mercedes-Benz | Our Cars</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-
-  <!-- Main CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
@@ -27,10 +23,6 @@
       align-items: center;
       justify-content: space-between;
     }
-<section class="departments">
-  <h2>Our Departments</h2>
-  <select id="departments"></select>
-</section>
 
     header img {
       height: 50px;
@@ -49,10 +41,13 @@
       padding: 80px 20px;
       text-align: center;
     }
-<section class="about" id="about">
-  <h2>About Mercedes-Benz</h2>
-  <p id="aboutText">Loading...</p>
-</section>
+
+    .about, .departments {
+      background: white;
+      padding: 40px;
+      margin: 40px;
+      border-radius: 12px;
+    }
 
     .cars-grid {
       display: grid;
@@ -67,11 +62,6 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       padding: 20px;
       position: relative;
-      transition: transform 0.3s ease;
-    }
-
-    .car-card:hover {
-      transform: translateY(-8px);
     }
 
     .car-card img {
@@ -79,21 +69,6 @@
       height: 180px;
       object-fit: cover;
       border-radius: 8px;
-    }
-
-    .car-card h3 {
-      margin: 15px 0 5px;
-    }
-
-    .car-card p {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .car-card strong {
-      display: block;
-      margin-top: 10px;
-      font-size: 18px;
     }
 
     .badge {
@@ -119,7 +94,7 @@
 <body>
 
 <header>
-  <img src="assets/images/5.png" alt="Mercedes Logo">
+  <img src="assets/images/5.png">
   <nav>
     <a href="cars.html">Cars</a>
     <a href="login.html">Admin</a>
@@ -131,16 +106,22 @@
   <p>Luxury • Performance • Innovation</p>
 </section>
 
-<section class="cars-grid" id="cars">
-  <!-- Cars load here automatically -->
+<section class="about">
+  <h2>About Mercedes-Benz</h2>
+  <p id="aboutText">Loading...</p>
 </section>
 
+<section class="departments">
+  <h2>Our Departments</h2>
+  <select id="departments"></select>
+</section>
+
+<section class="cars-grid" id="cars"></section>
+
 <footer>
-  © 2026 Mercedes-Benz Showcase — All Rights Reserved
+  © 2026 Mercedes-Benz Showcase
 </footer>
 
-<!-- Cars JS -->
 <script type="module" src="assets/js/cars.js"></script>
-
 </body>
 </html>
