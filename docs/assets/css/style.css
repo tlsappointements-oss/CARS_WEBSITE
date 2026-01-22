@@ -1,182 +1,156 @@
-/* --- GLOBAL THEME --- */
 :root {
-    --bg-main: #0a0b0d;
-    --card-bg: #14161a;
-    --sidebar-bg: #0f1115;
-    --accent-gold: #c5a059;
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --border-color: #26292f;
-    --danger: #ef4444;
-    --success: #10b981;
+    --bg: #0d0e12;
+    --sidebar: #15171c;
+    --accent: #c5a059; /* Luxury Gold */
+    --text: #e0e0e0;
+    --border: #2d3038;
 }
 
 body {
     margin: 0;
-    font-family: 'Inter', -apple-system, sans-serif;
-    background-color: var(--bg-main);
-    color: var(--text-primary);
-    overflow: hidden; /* App feel */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--text);
 }
 
-/* --- APP LAYOUT --- */
-.admin-app {
-    display: grid;
-    grid-template-columns: 280px 1fr;
+.admin-wrapper {
+    display: flex;
     height: 100vh;
 }
 
-/* --- SIDEBAR --- */
-.admin-sidebar {
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border-color);
-    padding: 30px 20px;
+/* SIDEBAR FIXES */
+.sidebar {
+    width: 280px;
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
+    padding: 30px 20px;
 }
 
-.admin-logo {
+.sidebar-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 50px;
-    padding-left: 10px;
 }
 
-.admin-logo img {
-    height: 40px;
-    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.3));
+.admin-logo-small {
+    height: 35px; /* Fixed Logo Size */
+    width: auto;
 }
 
-.brand { font-weight: 700; letter-spacing: 1px; font-size: 1.1rem; }
-.subtext { font-size: 0.65rem; color: var(--accent-gold); font-weight: 600; text-transform: uppercase; }
+.logo-info .brand-name {
+    display: block;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+}
 
-.nav-item {
+.logo-info .brand-sub {
+    font-size: 0.65rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* NAVIGATION */
+.sidebar-nav { flex: 1; }
+
+.nav-btn {
+    width: 100%;
+    padding: 14px 18px;
     background: transparent;
     border: none;
-    color: var(--text-secondary);
-    padding: 14px 18px;
-    border-radius: 10px;
+    color: #888;
     text-align: left;
     cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: 0.2s;
     font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.2s ease;
-    margin-bottom: 8px;
 }
 
-.nav-item:hover { color: #fff; background: #1e2126; }
-.nav-item.active { background: var(--accent-gold); color: #000; font-weight: 600; }
+.nav-btn.active, .nav-btn:hover {
+    background: #252830;
+    color: #fff;
+}
 
-/* --- TOPBAR --- */
-.admin-topbar {
-    height: 80px;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 40px;
+.nav-btn.active { color: var(--accent); }
+
+/* MAIN CONTENT */
+.content-area {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--bg);
+}
+
+.content-header {
+    padding: 25px 40px;
+    border-bottom: 1px solid var(--border);
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background: rgba(10, 11, 13, 0.8);
-    backdrop-filter: blur(10px);
+    align-items: center;
 }
 
-/* --- DASHBOARD CARDS --- */
-.admin-section { padding: 40px; }
+.section-content { padding: 40px; }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
+/* STATS */
+.stats-container { display: flex; gap: 20px; }
 .stat-card {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: var(--sidebar);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     gap: 20px;
+    min-width: 250px;
 }
 
-.stat-card i { font-size: 2rem; color: var(--accent-gold); }
-.stat-info h3 { margin: 0; font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; }
-.stat-info p { margin: 5px 0 0; font-size: 1.5rem; font-weight: 700; }
+.stat-card i { font-size: 2rem; color: var(--accent); }
 
-/* --- MANAGEMENT GRID (CARS) --- */
-.management-grid {
+/* INVENTORY EDITOR GRID */
+.inventory-layout {
     display: grid;
     grid-template-columns: 320px 1fr;
     gap: 30px;
-    margin-top: 20px;
 }
 
-/* Improved Select List */
-#editCarSelect {
-    height: 500px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+#carSelect {
+    width: 100%;
+    background: #000;
+    border: 1px solid var(--border);
+    color: #fff;
     padding: 10px;
-    outline: none;
+    border-radius: 10px;
 }
 
-#editCarSelect option {
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 5px;
+.editor-panel {
+    background: var(--sidebar);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
 }
 
-/* --- PROFESSIONAL FORM --- */
-.car-form-panel {
-    background: var(--card-bg);
-    padding: 35px;
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-.form-group { margin-bottom: 20px; }
-label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; }
+.full { grid-column: span 2; }
 
 input, select, textarea {
-    background: #0a0b0d;
-    border: 1px solid #333;
-    padding: 14px;
-    font-size: 0.95rem;
-    color: #fff;
-    border-radius: 10px;
     width: 100%;
-    transition: border 0.3s;
+    padding: 12px;
+    background: #0d0e12;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 6px;
+    margin-top: 8px;
 }
 
-input:focus { border-color: var(--accent-gold); outline: none; }
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-/* Buttons */
-.btn-primary {
-    background: var(--accent-gold);
-    color: #000;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
-
-.btn-danger {
-    background: transparent;
-    border: 1px solid var(--danger);
-    color: var(--danger);
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.btn-danger:hover { background: var(--danger); color: #fff; }
+/* BUTTONS */
+.btn-save { background: var(--accent); color: #000; font-weight: 700; border: none; padding: 12px 30px; border-radius: 6px; cursor: pointer; }
+.btn-delete { background: transparent; color: #ff4444; border: 1px solid #ff4444; padding: 12px 30px; border-radius: 6px; cursor: pointer; margin-left: 10px; }
+.btn-new { width: 100%; margin-top: 15px; padding: 12px; background: #222; color: #fff; border: 1px solid #444; cursor: pointer; }

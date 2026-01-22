@@ -3,129 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zerouali Dealer | Admin Dashboard</title>
+    <title>Zerouali Dealer | Admin Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="admin-app">
-    <aside class="admin-sidebar">
-        <div class="admin-logo">
-            <img src="assets/images/Mercedes.jpg" alt="Logo">
-            <div class="logo-text">
-                <span class="brand">ZEROUALI</span>
-                <span class="subtext">BRABUS DIVISION</span>
+<div class="admin-wrapper">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/Mercedes.jpg" class="admin-logo-small" alt="Mercedes">
+            <div class="logo-info">
+                <span class="brand-name">ZEROUALI</span>
+                <span class="brand-sub">ADMIN PANEL</span>
             </div>
         </div>
 
-        <nav class="admin-nav">
-            <button class="nav-item active" onclick="switchAdminSection('dashboard')">
-                <i class="fas fa-chart-line"></i> Dashboard
+        <nav class="sidebar-nav">
+            <button class="nav-btn active" onclick="switchSection('dashboard', this)">
+                <i class="fas fa-home"></i> Dashboard
             </button>
-            <button class="nav-item" onclick="switchAdminSection('cars')">
+            <button class="nav-btn" onclick="switchSection('inventory', this)">
                 <i class="fas fa-car"></i> Inventory
             </button>
-            <button class="nav-item" onclick="switchAdminSection('about')">
-                <i class="fas fa-info-circle"></i> About Content
+            <button class="nav-btn" onclick="switchSection('content', this)">
+                <i class="fas fa-edit"></i> About Section
             </button>
-            <button class="nav-item" onclick="switchAdminSection('departments')">
-                <i class="fas fa-building"></i> Departments
+            <button class="nav-btn" onclick="switchSection('depts', this)">
+                <i class="fas fa-users"></i> Departments
             </button>
         </nav>
 
-        <button class="logout-btn" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i> Sign Out
-        </button>
+        <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </aside>
 
-    <main class="admin-main">
-        <header class="admin-topbar">
-            <h1 id="sectionTitle">Dashboard</h1>
-            <div class="admin-user">
-                <span>Welcome, <strong>Zerouali Admin</strong></span>
-            </div>
+    <main class="content-area">
+        <header class="content-header">
+            <h1 id="page-title">Dashboard</h1>
+            <div class="user-badge">Admin: Zerouali</div>
         </header>
 
-        <section id="dashboardSection" class="admin-section">
-            <div class="stats-grid">
+        <section id="dashboard" class="section-content">
+            <div class="stats-container">
                 <div class="stat-card">
                     <i class="fas fa-car-side"></i>
-                    <div class="stat-info">
-                        <h3>Inventory</h3>
-                        <p id="carCount">Loading...</p>
-                    </div>
+                    <div><h3>Total Inventory</h3><p id="totalCars">0</p></div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-bolt" style="color: #00ffcc;"></i>
-                    <div class="stat-info">
-                        <h3>System Status</h3>
-                        <p>Firebase Active</p>
-                    </div>
+                    <i class="fas fa-check-circle" style="color:#00ff88;"></i>
+                    <div><h3>Database</h3><p>Online</p></div>
                 </div>
             </div>
         </section>
 
-        <section id="carsSection" class="admin-section" style="display:none;">
-            <div class="section-header">
-                <h2>Inventory Management</h2>
-                <button class="btn-primary" onclick="resetCarForm()">+ Add New Car</button>
-            </div>
-
-            <div class="management-grid">
+        <section id="inventory" class="section-content" style="display:none;">
+            <div class="inventory-layout">
                 <div class="car-list-panel">
-                    <h3>Select Car to Modify</h3>
-                    <select id="editCarSelect" size="10" onchange="loadCarForEdit()"></select>
+                    <h3>Select Vehicle</h3>
+                    <select id="carSelect" size="12" onchange="loadCarData()"></select>
+                    <button class="btn-new" onclick="clearForm()">+ New Vehicle</button>
                 </div>
 
-                <div class="car-form-panel">
-                    <div class="form-group">
-                        <label>Car Name</label>
-                        <input type="text" id="name" placeholder="e.g. BRABUS 800 G-Wagon">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Price ($)</label>
-                            <input type="number" id="price" placeholder="350000">
+                <div class="editor-panel">
+                    <h3>Vehicle Details</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Vehicle Name</label>
+                            <input type="text" id="carName" placeholder="e.g. BRABUS G800">
                         </div>
-                        <div class="form-group">
-                            <label>Model Image</label>
-                            <select id="image">
-                                <option value="brabus-g.jpg">BRABUS G-Class</option>
-                                <option value="brabus-s.jpg">BRABUS S-Class</option>
-                                <option value="amg-gt.jpg">AMG GT 63</option>
-                                <option value="e-class.jpg">E-Class Sedan</option>
+                        <div class="input-group">
+                            <label>Price ($)</label>
+                            <input type="text" id="carPrice" placeholder="450000">
+                        </div>
+                        <div class="input-group full">
+                            <label>Description</label>
+                            <textarea id="carDesc" rows="4"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Image Reference</label>
+                            <select id="carImage">
+                                <option value="g-class.jpg">G-Class BRABUS</option>
+                                <option value="s-class.jpg">S-Class BRABUS</option>
+                                <option value="gt63.jpg">AMG GT 63</option>
                             </select>
                         </div>
+                        <div class="input-group checkbox-group">
+                            <input type="checkbox" id="isNew"> <label>Mark as New Model</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="desc" rows="4"></textarea>
-                    </div>
-                    <div class="form-checkbox">
-                        <input type="checkbox" id="isNew"> 
-                        <label for="isNew">Mark as New Arrival</label>
-                    </div>
-                    <input type="hidden" id="carId">
-
+                    <input type="hidden" id="editId">
                     <div class="form-actions">
                         <button class="btn-save" onclick="saveCar()">Save Changes</button>
-                        <button class="btn-danger" onclick="deleteCar()">Remove from Site</button>
+                        <button class="btn-delete" onclick="deleteCar()">Delete Vehicle</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="aboutSection" class="admin-section" style="display:none;">
-            <div class="editor-container">
-                <h2>Modify "About Us" Section</h2>
-                <textarea id="aboutInput" placeholder="Write your dealership history here..."></textarea>
-                <button class="btn-save" onclick="saveAbout()">Update Website</button>
+        <section id="content" class="section-content" style="display:none;">
+            <div class="editor-panel">
+                <h3>Edit About Page</h3>
+                <textarea id="aboutText" rows="10" class="full-text"></textarea>
+                <button class="btn-save" onclick="saveAbout()">Update About Page</button>
             </div>
         </section>
-
     </main>
 </div>
+
 <script src="admin.js"></script>
 </body>
 </html>
