@@ -1,46 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- ✅ SINGLE HARD LOCK -->
-  <script type="module">
-    import { auth } from "./assets/js/firebase.js";
-    import { onAuthStateChanged } from
-      "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-    document.addEventListener("DOMContentLoaded", () => {
-      document.body.style.display = "none";
-
-      onAuthStateChanged(auth, user => {
-        if (!user) {
-          window.location.replace("login.html");
-        } else {
-          document.body.style.display = "block";
-        }
-      });
-    });
-  </script>
-</head>
-
 <body>
 
-<div class="admin-layout">
-  <aside>
-    <h2>Admin Panel</h2>
-    <button onclick="logout()">Logout</button>
+<div class="admin-app">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">
+      <img src="assets/images/Mercedes.jpg">
+      <span>Mercedes-Benz</span>
+    </div>
+
+    <nav>
+      <button onclick="switchAdminSection('dashboard')">Dashboard</button>
+      <button onclick="switchAdminSection('cars')">Cars</button>
+      <button onclick="switchAdminSection('about')">About</button>
+      <button onclick="switchAdminSection('departments')">Departments</button>
+    </nav>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
   </aside>
 
-  <main>
-    <h1>Manage Cars</h1>
+  <!-- MAIN -->
+  <main class="admin-main">
 
-    <div class="form">
+    <!-- TOP BAR -->
+    <header class="admin-topbar">
+      <h1 id="sectionTitle">Dashboard</h1>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="dashboardSection" class="admin-section">
+      <div class="stats">
+        <div class="stat-box">🚗 Cars in system</div>
+        <div class="stat-box">🔥 Firebase Connected</div>
+      </div>
+    </section>
+
+    <!-- CARS -->
+    <section id="carsSection" class="admin-section" style="display:none;">
+      <h2>Manage Cars</h2>
+
+      <select id="editCarSelect" onchange="loadCarForEdit()"></select>
+
       <input id="name" placeholder="Car name">
-      <input id="price" placeholder="Price (€)">
+      <input id="price" placeholder="Price">
       <textarea id="desc" placeholder="Description"></textarea>
 
       <select id="image">
@@ -50,84 +52,31 @@
         <option value="s-class.jpg">S-Class</option>
       </select>
 
-      <label>
-        <input type="checkbox" id="isNew"> New model
-      </label>
+      <label><input type="checkbox" id="isNew"> New model</label>
+      <input type="hidden" id="carId">
 
-      <button onclick="saveCar()">Save Car</button>
-    </div>
+      <div class="actions">
+        <button onclick="saveCar()">Save</button>
+        <button class="danger" onclick="deleteCar()">Delete</button>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="aboutSection" class="admin-section" style="display:none;">
+      <h2>Edit About Page</h2>
+      <textarea id="aboutInput"></textarea>
+      <button onclick="saveAbout()">Save</button>
+    </section>
+
+    <!-- DEPARTMENTS -->
+    <section id="departmentsSection" class="admin-section" style="display:none;">
+      <h2>Edit Departments</h2>
+      <textarea id="departmentsInput"></textarea>
+      <button onclick="saveDepartments()">Save</button>
+    </section>
+
   </main>
-</div>
-
-<!-- LOGOUT -->
-<script type="module">
-  import { auth } from "./assets/js/firebase.js";
-  import { signOut } from
-    "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  window.logout = async () => {
-    await signOut(auth);
-    window.location.replace("login.html");
-  };
-</script>
-
-<script type="module" src="assets/js/admin.js"></script>
-
-<!-- =========================
-     EXTRA ADMIN SECTIONS
-========================= -->
-
-<div class="admin-section">
-
-  <h2>Manage Website Content</h2>
-
-  <select id="adminSelector" onchange="switchAdminSection()">
-    <option value="cars">Edit / Delete Cars</option>
-    <option value="about">Edit About Section</option>
-    <option value="departments">Edit Departments</option>
-  </select>
 
 </div>
-
-<!-- ===== EDIT / DELETE CARS ===== -->
-<div id="editCarsSection" class="admin-section">
-
-  <h2>Edit Existing Cars</h2>
-
-  <select id="editCarSelect" onchange="loadCarForEdit()">
-    <option value="">Select a car</option>
-  </select>
-
-  <button class="danger" onclick="deleteCar()">Delete Selected Car</button>
-
-</div>
-
-<!-- ===== ABOUT SECTION ===== -->
-<div id="aboutSection" class="admin-section" style="display:none">
-
-  <h2>Edit About Section</h2>
-
-  <textarea id="aboutInput" placeholder="Write website bio / about text"></textarea>
-
-  <button onclick="saveAbout()">Save About</button>
-
-</div>
-
-<!-- ===== DEPARTMENTS SECTION ===== -->
-<div id="departmentsSection" class="admin-section" style="display:none">
-
-  <h2>Edit Company Departments</h2>
-
-  <textarea
-    id="departmentsInput"
-    placeholder="Comma separated: Sales, R&D, Design, Motorsport">
-  </textarea>
-
-  <button onclick="saveDepartments()">Save Departments</button>
-
-</div>
-
 
 </body>
-
-</html>

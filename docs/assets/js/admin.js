@@ -14,7 +14,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 /* =========================
-   DOM REFERENCES (REQUIRED)
+   DOM REFERENCES (SAFE)
 ========================= */
 const name = document.getElementById("name");
 const price = document.getElementById("price");
@@ -28,19 +28,26 @@ const aboutInput = document.getElementById("aboutInput");
 const departmentsInput = document.getElementById("departmentsInput");
 
 /* =========================
-   PANEL SWITCH
+   PANEL SWITCH (SAFE)
 ========================= */
 window.switchPanel = function () {
-  const v = document.getElementById("panelSelect").value;
+  const panelSelect = document.getElementById("panelSelect");
+  if (!panelSelect) return;
 
-  document.getElementById("carsPanel").style.display =
-    v === "cars" ? "block" : "none";
+  const v = panelSelect.value;
 
-  document.getElementById("aboutPanel").style.display =
-    v === "about" ? "block" : "none";
+  const carsPanel = document.getElementById("carsPanel");
+  const aboutPanel = document.getElementById("aboutPanel");
+  const departmentsPanel = document.getElementById("departmentsPanel");
 
-  document.getElementById("departmentsPanel").style.display =
-    v === "departments" ? "block" : "none";
+  if (carsPanel)
+    carsPanel.style.display = v === "cars" ? "block" : "none";
+
+  if (aboutPanel)
+    aboutPanel.style.display = v === "about" ? "block" : "none";
+
+  if (departmentsPanel)
+    departmentsPanel.style.display = v === "departments" ? "block" : "none";
 };
 
 /* =========================
@@ -49,6 +56,8 @@ window.switchPanel = function () {
 const carsCol = collection(db, "cars");
 
 async function loadCars() {
+  if (!carsList) return;
+
   const snap = await getDocs(carsCol);
 
   carsList.innerHTML = "<option value=''>Select car</option>";
@@ -62,6 +71,8 @@ async function loadCars() {
 }
 
 window.saveCar = async function () {
+  if (!name || !price || !desc || !image || !isNew || !carId) return;
+
   const id = carId.value;
 
   const data = {
@@ -92,6 +103,8 @@ window.saveCar = async function () {
 };
 
 window.loadCarForEdit = async function () {
+  if (!carsList) return;
+
   const id = carsList.value;
   if (!id) return;
 
@@ -111,7 +124,7 @@ window.loadCarForEdit = async function () {
 };
 
 window.deleteCar = async function () {
-  if (!carsList.value) return;
+  if (!carsList || !carsList.value) return;
 
   await deleteDoc(doc(db, "cars", carsList.value));
   alert("Car deleted");
@@ -122,9 +135,12 @@ window.deleteCar = async function () {
    ABOUT
 ========================= */
 window.saveAbout = async function () {
+  if (!aboutInput) return;
+
   await setDoc(doc(db, "settings", "about"), {
     text: aboutInput.value
   });
+
   alert("About updated");
 };
 
@@ -132,6 +148,8 @@ window.saveAbout = async function () {
    DEPARTMENTS
 ========================= */
 window.saveDepartments = async function () {
+  if (!departmentsInput) return;
+
   const list = departmentsInput.value
     .split(",")
     .map(v => v.trim());
