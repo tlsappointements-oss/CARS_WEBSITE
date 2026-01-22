@@ -204,3 +204,96 @@ window.saveDepartments = async function () {
 
 /* INIT */
 loadCarsForAdmin();
+import {
+  getDocs,
+  deleteDoc,
+  setDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* =========================
+   PANEL SWITCH
+========================= */
+window.switchAdminSection = function () {
+  const v = document.getElementById("adminSelector").value;
+
+  document.getElementById("editCarsSection").style.display =
+    v === "cars" ? "block" : "none";
+
+  document.getElementById("aboutSection").style.display =
+    v === "about" ? "block" : "none";
+
+  document.getElementById("departmentsSection").style.display =
+    v === "departments" ? "block" : "none";
+};
+
+/* =========================
+   LOAD CARS FOR EDIT / DELETE
+========================= */
+async function loadCarsForAdmin() {
+  const snap = await getDocs(collection(db, "cars"));
+  const select = document.getElementById("editCarSelect");
+
+  select.innerHTML = "<option value=''>Select a car</option>";
+
+  snap.forEach(d => {
+    const o = document.createElement("option");
+    o.value = d.id;
+    o.textContent = d.data().name;
+    select.appendChild(o);
+  });
+}
+
+window.loadCarForEdit = async function () {
+  const id = document.getElementById("editCarSelect").value;
+  if (!id) return;
+
+  const snap = await getDocs(collection(db, "cars"));
+
+  snap.forEach(d => {
+    if (d.id === id) {
+      const c = d.data();
+      document.getElementById("name").value = c.name;
+      document.getElementById("price").value = c.price;
+      document.getElementById("desc").value = c.description;
+      document.getElementById("image").value = c.image;
+      document.getElementById("isNew").checked = c.isNew;
+      document.getElementById("carId").value = d.id;
+    }
+  });
+};
+
+window.deleteCar = async function () {
+  const id = document.getElementById("editCarSelect").value;
+  if (!id) return;
+
+  await deleteDoc(doc(db, "cars", id));
+  alert("Car deleted");
+  loadCarsForAdmin();
+};
+
+/* =========================
+   ABOUT
+========================= */
+window.saveAbout = async function () {
+  await setDoc(doc(db, "settings", "about"), {
+    text: document.getElementById("aboutInput").value
+  });
+  alert("About updated");
+};
+
+/* =========================
+   DEPARTMENTS
+========================= */
+window.saveDepartments = async function () {
+  const list = document
+    .getElementById("departmentsInput")
+    .value.split(",")
+    .map(v => v.trim());
+
+  await setDoc(doc(db, "settings", "departments"), { list });
+  alert("Departments updated");
+};
+
+/* INIT */
+loadCarsForAdmin();
