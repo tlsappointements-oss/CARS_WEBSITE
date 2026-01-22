@@ -1,66 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Mercedes-Benz | Models</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/css/style.css">
+    <meta charset="UTF-8">
+    <title>Zerouali Dealer | Mercedes-Benz & BRABUS</title>
+    <link rel="stylesheet" href="website-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header class="web-header">
+        <div class="logo-area">
+            <img src="assets/images/Mercedes.jpg" alt="Logo">
+            <span>ZEROUALI</span>
+        </div>
+        <nav>
+            <a href="#">Inventory</a>
+            <a href="#">BRABUS Editions</a>
+            <a href="#">About</a>
+            <a href="login.html" class="portal-btn">Owner Portal</a>
+        </nav>
+    </header>
 
-<header class="header">
-  <div class="brand">
-    <img src="./assets/images/logo.png" alt="Mercedes">
-    <span>Mercedes-Benz</span>
-  </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ENGINEERED <br> TO PERFECTION</h1>
+            <p>Official ZEROUALI BRABUS Specialist</p>
+            <button class="cta">Explore Inventory</button>
+        </div>
+    </section>
 
-  <div class="menu">
-    <button class="menu-btn" onclick="toggleMenu()">?</button>
-    <div id="menuDropdown" class="menu-dropdown">
-      <a href="about.html">About</a>
-      <a href="departments.html">Company Departments</a>
-      <a href="login.html">Admin</a>
+    <div class="container">
+        <h2 class="section-title">Current Collection</h2>
+        <div id="carsGrid" class="cars-grid">
+            </div>
     </div>
-  </div>
-</header>
-
-<section class="hero">
-  <h1>Our Models</h1>
-  <p>Luxury • Performance • Innovation</p>
-</section>
-
-<section class="container cars-grid">
-  <div class="car" onclick="openCar(0)">
-    <img src="./assets/images/car1.jpg">
-    <h3>C-Class</h3>
-  </div>
-
-  <div class="car" onclick="openCar(1)">
-    <img src="./assets/images/car2.jpg">
-    <h3>E-Class</h3>
-  </div>
-
-  <div class="car" onclick="openCar(2)">
-    <img src="./assets/images/car3.jpg">
-    <h3>S-Class</h3>
-  </div>
-</section>
-
-<footer class="footer">
-  © 2026 Mercedes-Benz
-</footer>
-
-<!-- MODAL -->
-<div id="carModal" class="modal">
-  <span class="close" onclick="closeCar()">×</span>
-  <img id="modalImg">
-  <h2 id="modalTitle"></h2>
-  <div class="modal-nav">
-    <button onclick="prevCar()">‹</button>
-    <button onclick="nextCar()">›</button>
-  </div>
-</div>
-
-<script src="./assets/js/main.js"></script>
 </body>
 </html>

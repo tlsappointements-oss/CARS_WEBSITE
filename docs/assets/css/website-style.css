@@ -1,0 +1,30 @@
+:root { --gold: #c5a059; --black: #050505; --gray: #111; }
+body { margin: 0; background: var(--black); color: #fff; font-family: 'Inter', sans-serif; }
+
+.web-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    position: fixed; width: 100%; top: 0; z-index: 100; border-bottom: 1px solid #222;
+}
+
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo-area img { height: 35px; width: auto; }
+.logo-area span { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; }
+
+nav a { color: #888; text-decoration: none; margin-left: 30px; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
+nav a:hover { color: var(--gold); }
+.portal-btn { border: 1px solid var(--gold); padding: 8px 20px; color: var(--gold); border-radius: 4px; }
+
+.hero { height: 90vh; display: flex; align-items: center; padding-left: 10%; background: linear-gradient(to right, #000, transparent), url('hero-car.jpg') center/cover; }
+.hero h1 { font-size: 5rem; line-height: 1; margin: 0; font-weight: 900; }
+.hero p { color: var(--gold); letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; }
+
+.container { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+.cars-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+
+.car-card { background: var(--gray); border: 1px solid #222; overflow: hidden; transition: 0.4s; }
+.car-card:hover { border-color: var(--gold); transform: translateY(-10px); }
+.car-card img { width: 100%; height: 250px; object-fit: cover; }
+.car-info { padding: 25px; }
+.car-info h3 { margin: 0; font-size: 1.5rem; }
+.car-info .price { color: var(--gold); font-weight: bold; font-size: 1.2rem; margin-top: 10px; display: block; }
