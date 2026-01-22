@@ -1,45 +1,35 @@
-// --- Section Switching ---
-function switchAdminSection(sectionId) {
-    // Hide all
-    document.querySelectorAll('.admin-section').forEach(section => {
-        section.style.display = 'none';
-    });
-    // Show target
-    document.getElementById(sectionId + 'Section').style.display = 'block';
-    
-    // Update Title
-    document.getElementById('sectionTitle').innerText = sectionId.toUpperCase();
-    
-    // Update Active Nav
-    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-    event.currentTarget.classList.add('active');
-}
-
-// --- Car Management Logic ---
-let cars = [
-    { id: '1', name: 'Mercedes-Benz G63 BRABUS', price: '450000', desc: '800 HP Monster', image: 'brabus-g.jpg', isNew: true },
-    { id: '2', name: 'Mercedes AMG GT63', price: '180000', desc: 'Twin Turbo V8', image: 'amg-gt.jpg', isNew: false }
+// --- CAR REPOSITORY DATA ---
+let carsInventory = [
+    { id: '1', name: 'Mercedes-Benz G63 BRABUS', price: '450,000', desc: 'Custom 800HP Engine', image: 'brabus-g.jpg', isNew: true },
+    { id: '2', name: 'Mercedes AMG GT Black Series', price: '325,000', desc: 'Track-focused performance', image: 'amg-gt.jpg', isNew: false }
 ];
 
-function init() {
-    refreshCarList();
-    document.getElementById('carCount').innerText = `${cars.length} Active Listings`;
+// Initialize View
+window.onload = () => {
+    updateDashboardStats();
+    populateCarSelect();
+};
+
+function updateDashboardStats() {
+    document.getElementById('carCount').innerText = carsInventory.length;
 }
 
-function refreshCarList() {
+function populateCarSelect() {
     const select = document.getElementById('editCarSelect');
     select.innerHTML = '';
-    cars.forEach(car => {
-        const opt = document.createElement('option');
-        opt.value = car.id;
-        opt.innerText = car.name;
-        select.appendChild(opt);
+    carsInventory.forEach(car => {
+        const option = document.createElement('option');
+        option.value = car.id;
+        option.textContent = car.name;
+        select.appendChild(option);
     });
 }
 
+// Logic to load data into the form
 function loadCarForEdit() {
-    const id = document.getElementById('editCarSelect').value;
-    const car = cars.find(c => c.id === id);
+    const selectedId = document.getElementById('editCarSelect').value;
+    const car = carsInventory.find(c => c.id === selectedId);
+    
     if (car) {
         document.getElementById('carId').value = car.id;
         document.getElementById('name').value = car.name;
@@ -50,11 +40,16 @@ function loadCarForEdit() {
     }
 }
 
+// SAVE / UPDATE Logic
 function saveCar() {
     const id = document.getElementById('carId').value;
-    const carData = {
+    const name = document.getElementById('name').value;
+    
+    if(!name) return alert("Please enter a car name");
+
+    const newCarData = {
         id: id || Date.now().toString(),
-        name: document.getElementById('name').value,
+        name: name,
         price: document.getElementById('price').value,
         desc: document.getElementById('desc').value,
         image: document.getElementById('image').value,
@@ -62,34 +57,37 @@ function saveCar() {
     };
 
     if (id) {
-        // Update
-        const index = cars.findIndex(c => c.id === id);
-        cars[index] = carData;
-        alert("Car Updated Successfully!");
+        // Find existing and update
+        const index = carsInventory.findIndex(c => c.id === id);
+        carsInventory[index] = newCarData;
+        alert("Vehicle updated successfully.");
     } else {
-        // Create
-        cars.push(carData);
-        alert("New Car Added to Inventory!");
+        // Add new
+        carsInventory.push(newCarData);
+        alert("New vehicle added to gallery.");
     }
-    refreshCarList();
+
+    populateCarSelect();
+    updateDashboardStats();
 }
 
+// DELETE Logic
 function deleteCar() {
     const id = document.getElementById('carId').value;
-    if(confirm("Are you sure you want to delete this vehicle?")) {
-        cars = cars.filter(c => c.id !== id);
-        refreshCarList();
-        resetCarForm();
+    if (!id) return alert("Select a car to delete");
+
+    if (confirm("Permanently remove this vehicle from the database?")) {
+        carsInventory = carsInventory.filter(c => c.id !== id);
+        populateCarSelect();
+        updateDashboardStats();
+        resetForm();
     }
 }
 
-function resetCarForm() {
+function resetForm() {
     document.getElementById('carId').value = '';
     document.getElementById('name').value = '';
     document.getElementById('price').value = '';
     document.getElementById('desc').value = '';
     document.getElementById('isNew').checked = false;
 }
-
-// Run init on load
-init();
