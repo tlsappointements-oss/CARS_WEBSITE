@@ -1,164 +1,95 @@
-/* =========================
-   FIREBASE IMPORTS (ONCE)
-========================= */
-import { db } from "./firebase.js";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-  doc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* =========================
-   DOM REFERENCES (SAFE)
-========================= */
-const name = document.getElementById("name");
-const price = document.getElementById("price");
-const desc = document.getElementById("desc");
-const image = document.getElementById("image");
-const isNew = document.getElementById("isNew");
-const carId = document.getElementById("carId");
-
-const carsList = document.getElementById("carsList");
-const aboutInput = document.getElementById("aboutInput");
-const departmentsInput = document.getElementById("departmentsInput");
-
-/* =========================
-   PANEL SWITCH (SAFE)
-========================= */
-window.switchPanel = function () {
-  const panelSelect = document.getElementById("panelSelect");
-  if (!panelSelect) return;
-
-  const v = panelSelect.value;
-
-  const carsPanel = document.getElementById("carsPanel");
-  const aboutPanel = document.getElementById("aboutPanel");
-  const departmentsPanel = document.getElementById("departmentsPanel");
-
-  if (carsPanel)
-    carsPanel.style.display = v === "cars" ? "block" : "none";
-
-  if (aboutPanel)
-    aboutPanel.style.display = v === "about" ? "block" : "none";
-
-  if (departmentsPanel)
-    departmentsPanel.style.display = v === "departments" ? "block" : "none";
-};
-
-/* =========================
-   CARS CRUD
-========================= */
-const carsCol = collection(db, "cars");
-
-async function loadCars() {
-  if (!carsList) return;
-
-  const snap = await getDocs(carsCol);
-
-  carsList.innerHTML = "<option value=''>Select car</option>";
-
-  snap.forEach(d => {
-    const o = document.createElement("option");
-    o.value = d.id;
-    o.textContent = d.data().name;
-    carsList.appendChild(o);
-  });
+// --- Section Switching ---
+function switchAdminSection(sectionId) {
+    // Hide all
+    document.querySelectorAll('.admin-section').forEach(section => {
+        section.style.display = 'none';
+    });
+    // Show target
+    document.getElementById(sectionId + 'Section').style.display = 'block';
+    
+    // Update Title
+    document.getElementById('sectionTitle').innerText = sectionId.toUpperCase();
+    
+    // Update Active Nav
+    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
 }
 
-window.saveCar = async function () {
-  if (!name || !price || !desc || !image || !isNew || !carId) return;
+// --- Car Management Logic ---
+let cars = [
+    { id: '1', name: 'Mercedes-Benz G63 BRABUS', price: '450000', desc: '800 HP Monster', image: 'brabus-g.jpg', isNew: true },
+    { id: '2', name: 'Mercedes AMG GT63', price: '180000', desc: 'Twin Turbo V8', image: 'amg-gt.jpg', isNew: false }
+];
 
-  const id = carId.value;
+function init() {
+    refreshCarList();
+    document.getElementById('carCount').innerText = `${cars.length} Active Listings`;
+}
 
-  const data = {
-    name: name.value,
-    price: price.value,
-    description: desc.value,
-    image: image.value,
-    isNew: isNew.checked,
-    updatedAt: serverTimestamp()
-  };
+function refreshCarList() {
+    const select = document.getElementById('editCarSelect');
+    select.innerHTML = '';
+    cars.forEach(car => {
+        const opt = document.createElement('option');
+        opt.value = car.id;
+        opt.innerText = car.name;
+        select.appendChild(opt);
+    });
+}
 
-  if (id) {
-    await updateDoc(doc(db, "cars", id), data);
-    alert("Car updated");
-  } else {
-    await addDoc(carsCol, data);
-    alert("Car added");
-  }
-
-  name.value = "";
-  price.value = "";
-  desc.value = "";
-  image.value = "";
-  isNew.checked = false;
-  carId.value = "";
-
-  loadCars();
-};
-
-window.loadCarForEdit = async function () {
-  if (!carsList) return;
-
-  const id = carsList.value;
-  if (!id) return;
-
-  const snap = await getDocs(carsCol);
-
-  snap.forEach(d => {
-    if (d.id === id) {
-      const c = d.data();
-      carId.value = id;
-      name.value = c.name;
-      price.value = c.price;
-      desc.value = c.description;
-      image.value = c.image;
-      isNew.checked = c.isNew;
+function loadCarForEdit() {
+    const id = document.getElementById('editCarSelect').value;
+    const car = cars.find(c => c.id === id);
+    if (car) {
+        document.getElementById('carId').value = car.id;
+        document.getElementById('name').value = car.name;
+        document.getElementById('price').value = car.price;
+        document.getElementById('desc').value = car.desc;
+        document.getElementById('image').value = car.image;
+        document.getElementById('isNew').checked = car.isNew;
     }
-  });
-};
+}
 
-window.deleteCar = async function () {
-  if (!carsList || !carsList.value) return;
+function saveCar() {
+    const id = document.getElementById('carId').value;
+    const carData = {
+        id: id || Date.now().toString(),
+        name: document.getElementById('name').value,
+        price: document.getElementById('price').value,
+        desc: document.getElementById('desc').value,
+        image: document.getElementById('image').value,
+        isNew: document.getElementById('isNew').checked
+    };
 
-  await deleteDoc(doc(db, "cars", carsList.value));
-  alert("Car deleted");
-  loadCars();
-};
+    if (id) {
+        // Update
+        const index = cars.findIndex(c => c.id === id);
+        cars[index] = carData;
+        alert("Car Updated Successfully!");
+    } else {
+        // Create
+        cars.push(carData);
+        alert("New Car Added to Inventory!");
+    }
+    refreshCarList();
+}
 
-/* =========================
-   ABOUT
-========================= */
-window.saveAbout = async function () {
-  if (!aboutInput) return;
+function deleteCar() {
+    const id = document.getElementById('carId').value;
+    if(confirm("Are you sure you want to delete this vehicle?")) {
+        cars = cars.filter(c => c.id !== id);
+        refreshCarList();
+        resetCarForm();
+    }
+}
 
-  await setDoc(doc(db, "settings", "about"), {
-    text: aboutInput.value
-  });
+function resetCarForm() {
+    document.getElementById('carId').value = '';
+    document.getElementById('name').value = '';
+    document.getElementById('price').value = '';
+    document.getElementById('desc').value = '';
+    document.getElementById('isNew').checked = false;
+}
 
-  alert("About updated");
-};
-
-/* =========================
-   DEPARTMENTS
-========================= */
-window.saveDepartments = async function () {
-  if (!departmentsInput) return;
-
-  const list = departmentsInput.value
-    .split(",")
-    .map(v => v.trim());
-
-  await setDoc(doc(db, "settings", "departments"), { list });
-  alert("Departments updated");
-};
-
-/* =========================
-   INIT
-========================= */
-loadCars();
+// Run init on load
+init();
